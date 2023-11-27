@@ -1,10 +1,27 @@
-import { Module } from '@nestjs/common';
+import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { DatabaseModule } from './database/database.module';
+import { AuthMiddleware } from 'src/middlewares/auth';
+import { UserModule } from './modules/users/user.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, UserModule, 
+    
+    JwtModule.register({
+    secret: process.env.JWT_SECRET,
+    signOptions: { expiresIn: '7h', algorithm: 'HS256' }
+  })],  
   controllers: [AppController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+
+    //Rotas cobertas pelo sistema de tokens
+
+    consumer
+      .apply(AuthMiddleware)
+      .forRoutes('/teste'); 
+  }
+}

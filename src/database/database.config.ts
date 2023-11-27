@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import pg from 'pg';
+import { User } from 'src/modules/users/user.model';
 
 //Database config
 export const databaseProviders = [
@@ -13,8 +14,8 @@ export const databaseProviders = [
         username: process.env.USER,
         password: process.env.PASSWORD,
         database: 'postgres',
-        dialectModule: pg, //Required for deploy using vercel
-        dialectOptions: { //Required to use a PostgreSQL database on Azure
+        dialectModule: pg, //Necessário para deploy na vercel
+        dialectOptions: { //Necessário para usar o PostgreSQL no Azure
           ssl: {
             require: true,
           }
@@ -22,7 +23,7 @@ export const databaseProviders = [
       });
 
       //Load Models from project
-      sequelize.addModels([])      
+      sequelize.addModels([User])      
       await sequelize.sync();
 
       //Test database connection
