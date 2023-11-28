@@ -4,15 +4,14 @@ import { Produto } from '../produto.model';
 
 @Injectable()
 export class CreateProdutoService {
-  async createProduto(novoProduto: CreateProdutoDto): Promise<Produto> {
-    const usuarioJaExiste = await Produto.findOne({
-      where: { email: novoUsuario.email },
-    });
-
-    if (usuarioJaExiste)
+  async createProduto(
+    produtoASerCadastrado: CreateProdutoDto,
+  ): Promise<Produto> {
+    //Quais serão as regras para criação de produto?
+    if (produtoASerCadastrado)
       throw new HttpException('Usuário já existe! Tente novamente', 400);
 
-    const novoProduto = await User.create({ ...novoProduto });
+    const novoProduto = await Produto.create({ ...produtoASerCadastrado });
     return novoProduto;
   }
 }
