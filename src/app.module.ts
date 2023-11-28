@@ -4,24 +4,26 @@ import { DatabaseModule } from './database/database.module';
 import { AuthMiddleware } from 'src/middlewares/auth';
 import { UserModule } from './modules/users/user.module';
 import { JwtModule } from '@nestjs/jwt';
+import { ProdutosModule } from './modules/produtos/produtos.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, 
-    
+  imports: [
+    DatabaseModule,
+    UserModule,
+
     JwtModule.register({
-    secret: process.env.JWT_SECRET,
-    signOptions: { expiresIn: '7h', algorithm: 'HS256' }
-  })],  
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '7h', algorithm: 'HS256' },
+    }),
+    ProdutosModule,
+  ],
   controllers: [AppController],
   providers: [],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-
     //Rotas cobertas pelo sistema de tokens
 
-    consumer
-      .apply(AuthMiddleware)
-      .forRoutes('/teste'); 
+    consumer.apply(AuthMiddleware).forRoutes('/teste');
   }
 }

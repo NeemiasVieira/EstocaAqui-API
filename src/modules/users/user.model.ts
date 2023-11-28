@@ -16,5 +16,4 @@ export class User extends Model {
 
   @Column
   phoneNumber: string;
-
 }
