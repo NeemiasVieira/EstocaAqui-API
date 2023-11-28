@@ -13,17 +13,17 @@ dotenv.config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors(); 
+  app.enableCors();
 
   const config = new DocumentBuilder()
-  .setTitle('EstocaAqui - API')
-  .setDescription(APIDescription)
-  .setVersion('1.0')
-  .addTag('Usuarios')
-  .addTag('Produtos')
-  .addTag('Estoques')
-  .addBearerAuth()
-  .build();
+    .setTitle('EstocaAqui - API')
+    .setDescription(APIDescription)
+    .setVersion('1.0')
+    .addTag('Usuarios')
+    .addTag('Produtos')
+    .addTag('Estoques')
+    .addBearerAuth()
+    .build();
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document, {
@@ -40,11 +40,13 @@ async function bootstrap() {
     ],
   });
 
-  app.useGlobalPipes(new ValidationPipe({
-    disableErrorMessages: false, //Permite a costumização de mensagens do class-validator
-    whitelist: true, //Não permite que campos não esperados sejam enviados para o servidor
-    forbidNonWhitelisted: true    
-  }))
+  app.useGlobalPipes(
+    new ValidationPipe({
+      disableErrorMessages: false, //Permite a costumização de mensagens do class-validator
+      whitelist: true, //Não permite que campos não esperados sejam enviados para o servidor
+      forbidNonWhitelisted: true,
+    }),
+  );
 
   await app.listen(3333);
 }
