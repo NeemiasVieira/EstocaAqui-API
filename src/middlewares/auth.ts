@@ -26,11 +26,11 @@ export class AuthMiddleware implements NestMiddleware {
 
       } catch (error) {
         // Case the token is invalid
-        return response.status(401).json({ message: 'Invalid Token' });
+        return response.status(401).json({ message: 'Token inválido' });
       }
     } else {
       // Case the token was not provided
-      return response.status(401).json({ message: 'Token is required' });
+      return response.status(401).json({ message: 'O Token de acesso é obrigatório' });
     }
   }
 }

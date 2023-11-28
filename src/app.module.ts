@@ -4,6 +4,7 @@ import { DatabaseModule } from './database/database.module';
 import { AuthMiddleware } from 'src/middlewares/auth';
 import { UserModule } from './modules/users/user.module';
 import { JwtModule } from '@nestjs/jwt';
+import { FornecedoresModule } from './modules/fornecedores/fornecedores.module';
 
 @Module({
   imports: [DatabaseModule, UserModule, 
@@ -11,7 +12,7 @@ import { JwtModule } from '@nestjs/jwt';
     JwtModule.register({
     secret: process.env.JWT_SECRET,
     signOptions: { expiresIn: '7h', algorithm: 'HS256' }
-  })],  
+  }), FornecedoresModule],  
   controllers: [AppController],
   providers: [],
 })
@@ -22,6 +23,6 @@ export class AppModule implements NestModule {
 
     consumer
       .apply(AuthMiddleware)
-      .forRoutes('/teste'); 
+      .forRoutes('/create-fornecedor'); 
   }
 }
