@@ -25,8 +25,8 @@ export class LoginController {
     })
     async login(@Body() body: LoginUserDto, @Res() res : Response) {
         const { email, password } = body;
-        const response = await this.appservice.login({ email, password });
-        res.status(200).send(response);   
+        const resposta = await this.appservice.login({ email, password });
+        res.status(200).send(resposta);   
     }
 
 }
