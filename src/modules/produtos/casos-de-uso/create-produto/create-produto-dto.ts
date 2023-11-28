@@ -3,19 +3,19 @@ import { IsNotEmpty, IsString, IsEnum, IsNumber, Min } from 'class-validator';
 import { unidadeDeMedida } from '../produto.model';
 
 export class CreateProdutoDto {
-  @ApiProperty({ description: 'Nome do produto', example: 'Produto A' })
+  @ApiProperty({ description: 'Nome do produto', example: 'Coca Cola' })
   @IsNotEmpty()
   @IsString()
   nome: string;
 
-  @ApiProperty({ description: 'Tipo do produto', example: 'Tipo A' })
+  @ApiProperty({ description: 'Tipo do produto', example: 'Refrigerante' })
   @IsNotEmpty()
   @IsString()
   tipo: string;
 
   @ApiProperty({
     description: 'Descrição do produto',
-    example: 'Descrição do produto A',
+    example: 'Descrição sobre o produto',
   })
   @IsNotEmpty()
   @IsString()
@@ -30,17 +30,9 @@ export class CreateProdutoDto {
   @IsEnum(unidadeDeMedida, { message: 'Unidade de medida inválida' })
   unidade_de_medida: unidadeDeMedida;
 
-  @ApiProperty({ description: 'Quantidade medida do produto', example: 500 })
+  @ApiProperty({ description: 'Quantidade medida do produto', example: 350 })
   @IsNotEmpty()
   @IsNumber()
   @Min(0, { message: 'A quantidade medida deve ser maior que zero' })
   quantidade_medida: number;
-
-  @ApiProperty({
-    description: 'ID do usuário proprietário do produto',
-    example: 1,
-  })
-  @IsNotEmpty()
-  @IsNumber()
-  userId: number;
 }
