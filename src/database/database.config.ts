@@ -23,11 +23,11 @@ export const databaseProviders = [
         },
       });
 
-      //Load Models from project
+      //Carrega os modelos do projeto
       sequelize.addModels([User]);
       await sequelize.sync();
 
-      //Test database connection
+      //Teste de conexão com o banco de dados
       try {
         await sequelize.authenticate();
         console.log(

@@ -25,10 +25,10 @@ export class CreateUserController {
   //@Body() significa que o parâmetro virá do corpo da requisição HTTP
   // newUser é a variável que estamos criando e já informamos que ela será do tipo CreateUserDTO
   // O Promise<User> significa que o método register irá retornar uma promessa do tipo User
-  async register(@Body() newUser: CreateUserDto): Promise<User> {
+  async register(@Body() novoUsuario: CreateUserDto): Promise<User> {
     //Dentro do método é criada a variável response, que justamente, será a resposta da requisição.
     //É feita a chamada assíncrona do método createUser, que é feita pelo appservice
-    const response = await this.appserivce.createUser(newUser);
-    return response;
+    const resposta = await this.appserivce.createUser(novoUsuario);
+    return resposta;
   }
 }
