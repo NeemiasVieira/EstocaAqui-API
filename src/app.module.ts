@@ -23,6 +23,6 @@ export class AppModule implements NestModule {
 
     consumer
       .apply(AuthMiddleware)
-      .forRoutes('/create-entrada'); 
+      .forRoutes('/create-entrada' , '/get-entrada', 'delete-entrada', 'update-entrada'); 
   }
 }
