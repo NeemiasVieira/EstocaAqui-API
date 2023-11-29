@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import pg from 'pg';
 import { User } from 'src/modules/users/user.model';
+import { Entradas } from 'src/modules/entradas/entradas.model';
 
 //Database config
 export const databaseProviders = [
@@ -24,7 +25,7 @@ export const databaseProviders = [
       });
 
       //Carrega os modelos do projeto
-      sequelize.addModels([User]);
+      sequelize.addModels([User, Entradas]);
       await sequelize.sync();
 
       //Teste de conexão com o banco de dados
