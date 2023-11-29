@@ -1,13 +1,13 @@
 import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { User } from '../users/user.model';
 
-enum Tipo {
+export enum Tipo {
     compra = "Compra",
     garantia = "Garantia"
 }
 
 @Table
-export class Entradas extends Model {
+export class Entrada extends Model {
   @Column
   item: number;
 
@@ -28,11 +28,11 @@ export class Entradas extends Model {
   id_usuario: string;
 
 //   @ForeignKey(() => Produto)
-//   @Column
-//   id_produto: string;
+  @Column
+  id_produto: string;
 
 //   @ForeignKey(() => Fabricante)
-//   @Column
-//   id_fabricante: string;
+  @Column
+  id_fornecedor: string;
 
 }
