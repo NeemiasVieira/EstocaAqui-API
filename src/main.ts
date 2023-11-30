@@ -20,8 +20,7 @@ async function bootstrap() {
     .setDescription(APIDescription)
     .setVersion('1.0')
     .addTag('Usuarios')
-    .addTag('Produtos')
-    .addTag('Estoques')
+    .addTag('Fornecedores')
     .addTag('Entradas')
     .addBearerAuth()
     .build();
