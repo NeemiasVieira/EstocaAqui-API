@@ -14,6 +14,7 @@ export class UpdateUserController {
     @ApiResponse({status: 200, description: "Atualização realizada com sucesso"})
     @ApiResponse({status: 404, description: "Usuário não encontrado"})
     async updateUser(@Param("id") id : string, @Body() usuarioAtualizado : UpdateUserDto) : Promise<User>{
+        
         return await this.appservice.updateUser(id, usuarioAtualizado);
     }
 }

@@ -24,8 +24,8 @@ export class LoginController {
         description: 'Usuário ou senha incorretos!',
     })
     async login(@Body() body: LoginUserDto, @Res() res : Response) {
-        const { email, password } = body;
-        const resposta = await this.appservice.login({ email, password });
+        const { email, senha } = body;
+        const resposta = await this.appservice.login({ email, senha });
         res.status(200).send(resposta);   
     }
 
