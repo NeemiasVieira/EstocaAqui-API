@@ -1,20 +1,31 @@
-import { Column, Model, Table } from 'sequelize-typescript';
+import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
 @Table
 export class User extends Model {
   @Column
-  username: string;
+  nome: string;
 
   @Column
   email: string;
 
   @Column
-  password: string;
+  telefone: string;
 
   @Column
-  fullName: string;
+  senha: string;
 
   @Column
-  phoneNumber: string;
+  imagem_de_perfil: string;
+
+  @Column
+  cpf: string;
+
+  @Column
+  permissao: string;
+
+  //@ForeignKey(() => Grupo)
+  @Column
+  id_grupo: number;
+  
 
 }

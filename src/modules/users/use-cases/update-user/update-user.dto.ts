@@ -1,15 +1,37 @@
-import { IsString, IsStrongPassword } from 'class-validator';
+import { IsString, IsStrongPassword, MinLength, IsEmail} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateUserDto {
-  @ApiProperty({ description: 'Nome do usuário', example: "GabrielF" })
+  @ApiProperty({
+    description: 'Nome completo do usuário',
+    example: 'Gabriel Farias da Silva',
+  })
+
   @IsString()
-  username: string;
+  @MinLength(8)
+  nome: string;
+
+  @ApiProperty({
+    description: 'E-mail do usuário',
+    example: 'gabrielfarias@outlook.com',
+  })
+
+  @IsEmail({}, { message: 'O e-mail precisa ser válido!' })
+  email: string;
+
+  @ApiProperty({
+    description: 'Telefone do usuário',
+    example: '(13) 99702-3584',
+  })
+
+  @IsString()
+  telefone: string;
 
   @ApiProperty({
     description: 'Senha do usuário',
-    example: 'Password123!',
+    example: 'Password123@',
   })
+
   @IsString()
   @IsStrongPassword({
     minLength: 8,
@@ -17,13 +39,19 @@ export class UpdateUserDto {
     minNumbers: 1,
     minSymbols: 1,
   })
-  password: string;
+  senha: string;
 
-  @ApiProperty({ description: 'Nome completo do usuário' , example: "Gabriel Farias da Silva"})
+  @ApiProperty({
+    description: 'Link da imagem de perfil do usuário',
+    example: 'https://example.imagem.img',
+  })
   @IsString()
-  fullName: string;
+  imagem_de_perfil?: string;
 
-  @ApiProperty({ description: 'Número de telefone do usuário', example: "(13) 996020923" })
+  @ApiProperty({
+    description: 'Grupo de permissão do usuário',
+    example: 'admin',
+  })
   @IsString()
-  phoneNumber: string;
+  permissao: string;
 }

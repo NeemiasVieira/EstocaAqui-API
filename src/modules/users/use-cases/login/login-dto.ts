@@ -15,5 +15,5 @@ export class LoginUserDto {
     example: 'Password123!',
   })
   @IsNotEmpty()
-  password: string;
+  senha: string;
 }

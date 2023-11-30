@@ -11,13 +11,12 @@ export class UpdateUserService {
 
         if(!usuario) throw new HttpException("Usuário não encontrado", 404);
 
-        usuarioAtualizado.password = await hash(usuarioAtualizado.password, Number(process.env.PASSWORD_SALT));
-        const { username, fullName, password, phoneNumber } = usuarioAtualizado
+        usuarioAtualizado.senha = await hash(usuarioAtualizado.senha, Number(process.env.PASSWORD_SALT));
 
-        if(username) usuario.username = username;
-        if(fullName) usuario.fullName = fullName;
-        if(password) usuario.password = password;
-        if(phoneNumber) usuario.phoneNumber = phoneNumber;
+        Object.keys(usuarioAtualizado).forEach((chave) => {
+            usuario[chave] = usuarioAtualizado[chave];
+        })
+
         await usuario.save();
 
         return usuario;

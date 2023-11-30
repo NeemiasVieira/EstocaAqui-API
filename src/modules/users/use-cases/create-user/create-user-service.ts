@@ -11,7 +11,7 @@ export class CreateUserService {
 
     if (usuarioJaExiste) throw new HttpException("Usuário já existe! Tente novamente", 400);
 
-    novoUsuario.password = await hash(novoUsuario.password, Number(process.env.PASSWORD_SALT));
+    novoUsuario.senha = await hash(novoUsuario.senha, Number(process.env.PASSWORD_SALT));
 
     const novoCliente = await User.create({ ...novoUsuario });
     return novoCliente;
