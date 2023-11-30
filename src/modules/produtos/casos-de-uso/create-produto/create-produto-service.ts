@@ -1,17 +1,18 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { CreateProdutoDto } from './create-produto-dto';
 import { Produto } from '../produto.model';
 
 @Injectable()
 export class CreateProdutoService {
   async createProduto(
+    idUsuario: string,
     produtoASerCadastrado: CreateProdutoDto,
   ): Promise<Produto> {
     //Quais serão as regras para criação de produto?
-    if (produtoASerCadastrado)
-      throw new HttpException('Usuário já existe! Tente novamente', 400);
-
-    const novoProduto = await Produto.create({ ...produtoASerCadastrado });
+    const novoProduto = await Produto.create({
+      ...produtoASerCadastrado,
+      idUsuario,
+    });
     return novoProduto;
   }
 }

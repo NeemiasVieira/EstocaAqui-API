@@ -55,7 +55,7 @@ export class Produto extends Model {
     type: DataType.INTEGER,
     allowNull: false,
   })
-  userId: number;
+  idUsuario: number;
 
   @BelongsTo(() => User)
   user: User;
