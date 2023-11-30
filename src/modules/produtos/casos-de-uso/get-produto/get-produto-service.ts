@@ -1,16 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { CreateProdutoDto } from './create-produto-dto';
 import { Produto } from '../produto.model';
 
 @Injectable()
 export class GetProdutoService {
-  async getProduto(idUsuario: string, idProduto: string): Promise<object> {
-    //Quais serão as regras para criação de produto?
-
+  async getProduto(idUsuario: number, idProduto: number): Promise<object> {
     try {
       if (idProduto) {
         const produto = await Produto.findOne({
-          where: { id: idUsuario, idProduto },
+          where: { id: idProduto, idUsuario: idUsuario },
         });
         return {
           mensagem: 'Produto encontrado',
@@ -19,13 +16,14 @@ export class GetProdutoService {
       }
 
       const todosProdutosUsuario = await Produto.findAll({
-        where: { id: idUsuario },
+        where: { idUsuario: idUsuario },
       });
       return {
         mensagem: 'Produtos encontrados',
         produto: todosProdutosUsuario,
       };
     } catch (error) {
+      console.log(error);
       return {
         mensagem: 'Erro ao listar',
         erro: error,

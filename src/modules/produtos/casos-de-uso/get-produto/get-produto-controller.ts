@@ -21,10 +21,10 @@ export class GetProdutoController {
   @UseGuards(AuthGuard)
   async getProduto(
     @Request() requisicao: any,
-    @Query('id') idProduto: string,
+    @Query('id') idProduto: number,
   ): Promise<object> {
     const idUsuario = requisicao.user.subject;
-    const resposta = await this.appserivce.getProduto(idProduto, idUsuario);
+    const resposta = await this.appserivce.getProduto(idUsuario, idProduto);
     return resposta;
   }
 }
