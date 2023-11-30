@@ -7,12 +7,23 @@ export class CreateProdutoService {
   async createProduto(
     idUsuario: string,
     produtoASerCadastrado: CreateProdutoDto,
-  ): Promise<Produto> {
+  ): Promise<object> {
     //Quais serão as regras para criação de produto?
-    const novoProduto = await Produto.create({
-      ...produtoASerCadastrado,
-      idUsuario,
-    });
-    return novoProduto;
+
+    try {
+      const novoProduto = await Produto.create({
+        ...produtoASerCadastrado,
+        idUsuario,
+      });
+      return {
+        mensagem: 'Produto criado com sucesso',
+        produto: novoProduto,
+      };
+    } catch (error) {
+      return {
+        mensagem: 'Erro ao criar o produto',
+        erro: error,
+      };
+    }
   }
 }

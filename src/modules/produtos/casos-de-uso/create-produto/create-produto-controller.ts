@@ -2,7 +2,6 @@ import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateProdutoService } from './create-produto-service';
 import { CreateProdutoDto } from './create-produto-dto';
-import { Produto } from '../produto.model';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('produto')
@@ -24,7 +23,7 @@ export class CreateProdutoController {
   async criarProduto(
     @Request() requisicao: any,
     @Body() novoProduto: CreateProdutoDto,
-  ): Promise<Produto> {
+  ): Promise<object> {
     const idUsuario = requisicao.user.subject;
     const resposta = await this.appserivce.createProduto(
       idUsuario,
