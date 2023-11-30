@@ -5,7 +5,7 @@ import { UpdateFornecedorDto } from './update-fornecedor.dto';
 import { Fornecedor } from '../../fornecedor.model';
 
 @Controller('update-fornecedor')
-@ApiTags("Fornecedor")
+@ApiTags("Fornecedores")
 export class UpdateFornecedorController {
     constructor(private readonly appservice : UpdateFornecedorService){}
 

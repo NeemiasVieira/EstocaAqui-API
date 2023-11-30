@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DeleteFornecedorService } from './delete-fornecedor.service';
 
 @Controller('delete-fornecedor')
-@ApiTags("Fornecedor")
+@ApiTags("Fornecedores")
 export class DeleteFornecedorController {
 
     constructor(private readonly appservice : DeleteFornecedorService) {}

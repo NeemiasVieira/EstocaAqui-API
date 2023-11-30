@@ -5,7 +5,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { User } from 'src/modules/users/user.model';
 
 @Controller('get-fornecedor')
-@ApiTags("Fornecedor")
+@ApiTags("Fornecedores")
 export class GetFornecedorController {
 
     constructor(private readonly appservice : GetFornecedorService ){}

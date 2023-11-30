@@ -5,16 +5,16 @@ import { hash } from 'bcrypt';
 
 @Injectable()
 export class CreateUserService {
-  async createUser(newUser: CreateUserDto): Promise<User> {
+  async createUser(novoUsuario: CreateUserDto): Promise<User> {
 
-    const userAlreadyExists = await User.findOne({ where: { email: newUser.email } });
+    const usuarioJaExiste = await User.findOne({ where: { email: novoUsuario.email } });
 
-    if (userAlreadyExists) throw new HttpException("User already exists, try again!", 400);
+    if (usuarioJaExiste) throw new HttpException("Usuário já existe! Tente novamente", 400);
 
-    newUser.password = await hash(newUser.password, Number(process.env.PASSWORD_SALT));
+    novoUsuario.password = await hash(novoUsuario.password, Number(process.env.PASSWORD_SALT));
 
-    const newClient = await User.create({ ...newUser });
-    return newClient
+    const novoCliente = await User.create({ ...novoUsuario });
+    return novoCliente;
 
 
   }

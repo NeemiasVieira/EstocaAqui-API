@@ -4,7 +4,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { Fornecedor } from '../../fornecedor.model';
 import { CreateFornecedorDto } from './create-fornecedor.dto';
 
-@ApiTags("Fornecedor")
+@ApiTags("Fornecedores")
 @ApiBearerAuth()
 @Controller('create-fornecedor')
 export class CreateFornecedorController {
