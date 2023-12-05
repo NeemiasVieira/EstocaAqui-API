@@ -5,13 +5,21 @@ import { GetProdutoController } from './casos-de-uso/get-produto/get-produto-con
 import { GetProdutoService } from './casos-de-uso/get-produto/get-produto-service';
 import { DeleteProdutoController } from './casos-de-uso/delete-produto/delete-produto-controller';
 import { DeleteProdutoService } from './casos-de-uso/delete-produto/delete-produto-service';
+import { updateProdutoController } from './casos-de-uso/update-produto/update-produto-controller';
+import { UpdateProdutoService } from './casos-de-uso/update-produto/update-produto-service';
 
 @Module({
   controllers: [
     CreateProdutoController,
     GetProdutoController,
     DeleteProdutoController,
+    updateProdutoController,
   ],
-  providers: [CreateProdutoService, GetProdutoService, DeleteProdutoService],
+  providers: [
+    CreateProdutoService,
+    GetProdutoService,
+    DeleteProdutoService,
+    UpdateProdutoService,
+  ],
 })
 export class ProdutosModule {}
