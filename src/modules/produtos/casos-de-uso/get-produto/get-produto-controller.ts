@@ -1,5 +1,5 @@
 import { Controller, Get, Query, Request, UseGuards } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { GetProdutoService } from './get-produto-service';
 
@@ -18,6 +18,7 @@ export class GetProdutoController {
     status: 400,
     description: 'Erro ao listar o(s) produto(s)',
   })
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   async getProduto(
     @Request() requisicao: any,

@@ -16,7 +16,7 @@ export class UpdateProdutoService {
     if (!produtoASerAtualizado)
       throw new HttpException('Produto não encontrado', 404);
 
-    if (produtoASerAtualizado.idUsuario !== idUsuario)
+    if (produtoASerAtualizado.idUsuario !== +idUsuario)
       throw new HttpException('Usuário não autorizado', 401);
 
     Object.keys(novosDadosDoProduto).forEach((propriedade) => {

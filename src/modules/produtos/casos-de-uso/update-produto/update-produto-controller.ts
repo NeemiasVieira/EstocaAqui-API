@@ -1,12 +1,12 @@
 import {
   Body,
   Controller,
-  Put,
-  Query,
+  Param,
+  Patch,
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { UpdateProdutoDto } from './update-produto-dto';
 import { UpdateProdutoService } from './update-produto-service';
@@ -16,7 +16,7 @@ import { UpdateProdutoService } from './update-produto-service';
 export class updateProdutoController {
   constructor(private readonly appserivce: UpdateProdutoService) {}
 
-  @Put()
+  @Patch("/:id")
   @ApiOperation({ summary: 'Atualiza o produto selecionado' })
   @ApiResponse({
     status: 201,
@@ -26,10 +26,11 @@ export class updateProdutoController {
     status: 400,
     description: 'Erro ao atualizar o produto',
   })
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   async updateProduto(
     @Request() requisicao: any,
-    @Query('id') idProduto: number,
+    @Param('id') idProduto: number,
     @Body() novosDadosDoProduto: UpdateProdutoDto,
   ): Promise<object> {
     const idUsuario = requisicao.user.subject;
@@ -38,6 +39,7 @@ export class updateProdutoController {
       idProduto,
       novosDadosDoProduto,
     );
+    
     return resposta;
   }
 }
