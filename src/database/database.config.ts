@@ -11,10 +11,10 @@ export const databaseProviders = [
     useFactory: async () => {
       const sequelize = new Sequelize({
         dialect: 'postgres',
-        host: process.env.HOST,
+        host: process.env.DB_HOST,
         port: 5432,
-        username: process.env.BD_USER,
-        password: process.env.PASSWORD,
+        username: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
         database: 'postgres',
         dialectModule: pg, //Necessário para deploy na vercel
         dialectOptions: {
