@@ -13,9 +13,10 @@ export class UpdateFornecedorService {
 
         const { razao_social, nome_fantasia, cnpj} = fornecedorAtualizado
 
-        if(fornecedor) fornecedor.razao_social = razao_social;
-        if(fornecedor) fornecedor.nome_fantasia = nome_fantasia;
-        if(fornecedor) fornecedor.cnpj = cnpj;
+        Object.keys(fornecedorAtualizado).forEach((chave) => {
+            fornecedor[chave] = fornecedorAtualizado[chave];
+        })
+
         await fornecedor.save();
 
         return fornecedor;

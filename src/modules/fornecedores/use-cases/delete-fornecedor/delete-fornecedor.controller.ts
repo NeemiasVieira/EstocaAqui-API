@@ -1,6 +1,7 @@
-import { Controller, Delete, Param } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Delete, Param, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DeleteFornecedorService } from './delete-fornecedor.service';
+import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('delete-fornecedor')
 @ApiTags("Fornecedores")
@@ -20,9 +21,10 @@ export class DeleteFornecedorController {
           status: 404,
           description: 'Usuário não encontrado',
       })
-
+      @ApiBearerAuth()
+      @UseGuards(AuthGuard)
       async deleteFornecedor (@Param('id')id: String){
         await this.appservice.DeleteFornecedor(id);
-
+      
       }
 }
