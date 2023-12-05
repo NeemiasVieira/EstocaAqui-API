@@ -19,13 +19,7 @@ export class UpdateFornecedorController {
     @UseGuards(AuthGuard)
     async updateFornecedor(@Param("id") id_fornecedor: string, @Body()  fornecedorAtualizado: UpdateFornecedorDto, @Request() requisicao: any) : Promise<Fornecedor>{
         const id_usuario = requisicao.user.subject
-        
-        const fornecedor = await Fornecedor.findOne({where:{id: id_fornecedor}})
-
-        if(!fornecedor) throw new HttpException('Fornecedor não encontrado!', 404);
-
-        if(fornecedor.id_usuario != id_usuario) throw new HttpException('Acesso não autorizado!', 401)
-         
-        return await this.appservice.updateFornecedor(id_fornecedor, fornecedorAtualizado)
+                 
+        return await this.appservice.updateFornecedor(id_fornecedor, fornecedorAtualizado, id_usuario)
     }
 }
