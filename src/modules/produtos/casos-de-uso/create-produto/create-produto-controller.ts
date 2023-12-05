@@ -1,5 +1,5 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateProdutoService } from './create-produto-service';
 import { CreateProdutoDto } from './create-produto-dto';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
@@ -19,6 +19,7 @@ export class CreateProdutoController {
     status: 400,
     description: 'Erro ao criar produto',
   })
+  @ApiBearerAuth()
   @UseGuards(AuthGuard)
   async criarProduto(
     @Request() requisicao: any,
