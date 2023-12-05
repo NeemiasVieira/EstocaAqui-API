@@ -1,11 +1,13 @@
-import { Body, Controller, Param, Patch } from '@nestjs/common';
-import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, HttpException, Param, Patch, Request, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateFornecedorService } from './update-fornecedor.service';
 import { UpdateFornecedorDto } from './update-fornecedor.dto';
 import { Fornecedor } from '../../fornecedor.model';
+import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('update-fornecedor')
 @ApiTags("Fornecedores")
+
 export class UpdateFornecedorController {
     constructor(private readonly appservice : UpdateFornecedorService){}
 
@@ -13,7 +15,11 @@ export class UpdateFornecedorController {
     @ApiOperation({summary: "Atualiza o fornecedor"})
     @ApiResponse({status: 200, description: "Atualização realizada com sucesso"})
     @ApiResponse({status: 404, description: "Fornecedor não encontrado"})
-    async updateFornecedor(@Param("id") id: string, @Body() fornecedorAtualizado: UpdateFornecedorDto) : Promise<Fornecedor>{
-        return await this.appservice.updateFornecedor(id, fornecedorAtualizado)
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard)
+    async updateFornecedor(@Param("id") id_fornecedor: string, @Body()  fornecedorAtualizado: UpdateFornecedorDto, @Request() requisicao: any) : Promise<Fornecedor>{
+        const id_usuario = requisicao.user.subject
+                 
+        return await this.appservice.updateFornecedor(id_fornecedor, fornecedorAtualizado, id_usuario)
     }
 }

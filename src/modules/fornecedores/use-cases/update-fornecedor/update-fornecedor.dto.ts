@@ -8,6 +8,7 @@ export class UpdateFornecedorDto {
   razao_social: string;
 
   @ApiProperty({description: 'Nome da marca', example: 'MegaG', })
+  @IsString()
 
   nome_fantasia: string;
 
