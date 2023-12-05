@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, OnApplicationBootstrap, Logger } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { DatabaseModule } from './database/database.module';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
@@ -17,8 +17,35 @@ import { UpdateGrupoService } from './modules/grupos/use-cases/update-grupo/upda
 import { GruposModule } from './modules/grupos/grupos.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule, AuthModule, EntradasModule, FornecedoresModule, GruposModule],  
-  controllers: [AppController, CreateGrupoController, DeleteGrupoController, UpdateGrupoController, GetGrupoController],
-  providers: [AuthGuard, GetGrupoService, CreateGrupoService, DeleteGrupoService, UpdateGrupoService],
+  imports: [
+    DatabaseModule,
+    UserModule,
+    AuthModule,
+    EntradasModule,
+    FornecedoresModule,
+    GruposModule,
+  ],
+  controllers: [
+    AppController,
+    CreateGrupoController,
+    DeleteGrupoController,
+    UpdateGrupoController,
+    GetGrupoController,
+  ],
+  providers: [
+    AuthGuard,
+    GetGrupoService,
+    CreateGrupoService,
+    DeleteGrupoService,
+    UpdateGrupoService,
+  ],
 })
-export class AppModule {}
+export class AppModule implements OnApplicationBootstrap {
+
+  private readonly logger = new Logger("EstocaAqui-API");
+
+  onApplicationBootstrap() {
+    console.clear();
+    this.logger.debug("API EstocaAqui iniciada com sucesso em http://localhost:3333 💡🚷🚀")
+  }
+}
