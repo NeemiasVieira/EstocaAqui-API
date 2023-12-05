@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import pg from 'pg';
 import { User } from 'src/modules/users/user.model';
+import { Fornecedor } from 'src/modules/fornecedores/fornecedor.model';
 import { Entrada } from 'src/modules/entradas/entradas.model';
 import { Produto } from 'src/modules/produtos/casos-de-uso/produto.model';
 
@@ -11,10 +12,10 @@ export const databaseProviders = [
     useFactory: async () => {
       const sequelize = new Sequelize({
         dialect: 'postgres',
-        host: process.env.HOST,
+        host: process.env.DB_HOST,
         port: 5432,
-        username: process.env.BD_USER,
-        password: process.env.PASSWORD,
+        username: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
         database: 'postgres',
         dialectModule: pg, //Necessário para deploy na vercel
         dialectOptions: {
@@ -26,7 +27,7 @@ export const databaseProviders = [
       });
 
       //Carrega os modelos do projeto
-      sequelize.addModels([User, Entrada, Produto]);
+      sequelize.addModels([User, Entrada, Fornecedor, Produto]);
       await sequelize.sync();
 
       //Teste de conexão com o banco de dados

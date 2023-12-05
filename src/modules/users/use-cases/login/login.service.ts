@@ -10,21 +10,23 @@ export class LoginService {
 
     constructor(private jwtService: JwtService) {}
 
-    async login({ email, password }: LoginUserDto) {
+    async login({ email, senha }: LoginUserDto) {
         const usuarioExiste = await User.findOne({ where: { email } });
 
         if (!usuarioExiste) throw new HttpException("Usuário ou senha incorretos", 400);
 
         const usuarioNoBanco = usuarioExiste;
+        const senhaEstaCorreta = await compare(senha, usuarioNoBanco.senha);
 
-        const passwordIsCorrect = await compare(password, usuarioNoBanco.password);
-        if (!passwordIsCorrect) throw new HttpException("Usuário ou senha incorretos", 400);
+        if (!senhaEstaCorreta) throw new HttpException("Usuário ou senha incorretos", 400);
 
         //No token é armazenado o ID do usuário para usos futuros da aplicação
         const token = this.jwtService.sign({}, { secret: process.env.JWT_SECRET, subject: String(usuarioExiste.id) });
 
+        const nomes = usuarioExiste.nome.split(" ");
+
         return {
-            mensagem: `Usuário ${usuarioExiste.username} autenticado com sucesso!`,
+            mensagem: `Usuário ${nomes[0]} autenticado com sucesso!`,
             usuario: usuarioNoBanco,
             token: token
         };
