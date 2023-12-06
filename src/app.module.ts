@@ -5,8 +5,9 @@ import { UsuarioModule } from './modules/usuario/usuario.module';
 import { ProdutosModule } from './modules/produtos/produtos.module';
 import { EntradasModule } from './modules/entradas/entradas.module';
 import { AuthModule } from './middlewares/auth-module/auth-module.module';
-import { FornecedoresModule } from './modules/fornecedores/fornecedores.module';
+import { FornecedorModule } from './modules/fornecedor/fornecedor.module';
 import { GrupoModule } from './modules/grupos/grupo.module';
+
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { GrupoModule } from './modules/grupos/grupo.module';
     UsuarioModule,
     AuthModule,
     EntradasModule,
-    FornecedoresModule,
+    FornecedorModule,
     ProdutosModule,
     GrupoModule,
   ],

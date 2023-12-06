@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
 import pg from 'pg';
 import { Usuario } from 'src/modules/usuario/usuario.model';
-import { Fornecedor } from 'src/modules/fornecedores/fornecedor.model';
+import { Fornecedor } from 'src/modules/fornecedor/fornecedor.model';
 import { Entrada } from 'src/modules/entradas/entradas.model';
 import { Grupo } from 'src/modules/grupos/grupo.model';
 import { Produto } from 'src/modules/produtos/produto.model';

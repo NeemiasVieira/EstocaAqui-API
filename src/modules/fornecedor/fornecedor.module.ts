@@ -12,4 +12,4 @@ import { DeleteFornecedorService } from './use-cases/delete-fornecedor/delete-fo
   controllers: [CreateFornecedorController, GetFornecedorController, UpdateFornecedorController, DeleteFornecedorController],
   providers: [CreateFornecedorService, GetFornecedorService, UpdateFornecedorService, DeleteFornecedorService]
 })
-export class FornecedoresModule {}
+export class FornecedorModule {}
