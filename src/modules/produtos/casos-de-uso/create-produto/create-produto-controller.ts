@@ -5,7 +5,7 @@ import { CreateProdutoDto } from './create-produto-dto';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('produto')
-@ApiTags('Produtos')
+@ApiTags('Produto')
 export class CreateProdutoController {
   constructor(private readonly appserivce: CreateProdutoService) {}
 

@@ -6,7 +6,7 @@ import { Fornecedor } from '../../fornecedor.model';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('update-fornecedor')
-@ApiTags("Fornecedores")
+@ApiTags("Fornecedor")
 
 export class UpdateFornecedorController {
     constructor(private readonly appservice : UpdateFornecedorService){}

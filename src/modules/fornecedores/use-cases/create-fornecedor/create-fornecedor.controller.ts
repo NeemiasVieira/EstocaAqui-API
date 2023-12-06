@@ -5,7 +5,7 @@ import { Fornecedor } from '../../fornecedor.model';
 import { CreateFornecedorDto } from './create-fornecedor.dto';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
-@ApiTags("Fornecedores")
+@ApiTags("Fornecedor")
 @ApiBearerAuth()
 @Controller('create-fornecedor')
 export class CreateFornecedorController {

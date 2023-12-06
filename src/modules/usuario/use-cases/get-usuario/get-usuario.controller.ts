@@ -4,7 +4,7 @@ import { Usuario } from '../../usuario.model';
 import { GetUsuarioService } from './get-usuario.service';
 
 @Controller('get-usuario')
-@ApiTags("Usuarios")
+@ApiTags("Usuario")
 export class GetUsuarioController {
 
     constructor(private readonly appservice : GetUsuarioService){}

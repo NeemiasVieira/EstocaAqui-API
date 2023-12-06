@@ -4,7 +4,7 @@ import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { DeleteProdutoService } from './delete-produto-service';
 
 @Controller('produto')
-@ApiTags('Produtos')
+@ApiTags('Produto')
 export class DeleteProdutoController {
   constructor(private readonly appserivce: DeleteProdutoService) {}
 

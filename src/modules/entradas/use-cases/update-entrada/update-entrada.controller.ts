@@ -5,7 +5,7 @@ import { Entrada } from '../../entradas.model';
 import { UpdateEntradaDto } from './update-entrada.dto';
 
 @Controller('update-entrada')
-@ApiTags("Entradas")
+@ApiTags("Entrada")
 export class UpdateEntradaController {
     constructor(private readonly appservice: UpdateEntradaService){}
 

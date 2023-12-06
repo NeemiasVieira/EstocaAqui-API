@@ -5,7 +5,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('get-fornecedor')
-@ApiTags("Fornecedores")
+@ApiTags("Fornecedor")
 export class GetFornecedorController {
 
     constructor(private readonly appservice : GetFornecedorService ){}

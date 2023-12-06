@@ -6,7 +6,7 @@ import { CreateEntradaService } from './create-entrada.service';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('create-entrada')
-@ApiTags("Entradas")
+@ApiTags("Entrada")
 
 export class CreateEntradaController {
 

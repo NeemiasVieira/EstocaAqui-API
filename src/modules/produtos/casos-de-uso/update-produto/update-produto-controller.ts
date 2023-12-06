@@ -12,7 +12,7 @@ import { UpdateProdutoDto } from './update-produto-dto';
 import { UpdateProdutoService } from './update-produto-service';
 
 @Controller('produto')
-@ApiTags('Produtos')
+@ApiTags('Produto')
 export class updateProdutoController {
   constructor(private readonly appserivce: UpdateProdutoService) {}
 

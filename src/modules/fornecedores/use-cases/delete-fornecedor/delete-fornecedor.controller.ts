@@ -4,7 +4,7 @@ import { DeleteFornecedorService } from './delete-fornecedor.service';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('delete-fornecedor')
-@ApiTags("Fornecedores")
+@ApiTags("Fornecedor")
 export class DeleteFornecedorController {
 
     constructor(private readonly appservice : DeleteFornecedorService) {}

@@ -4,7 +4,7 @@ import { CreateUsuarioService } from './create-usuario-service';
 import { Usuario } from '../../usuario.model';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@ApiTags('Usuarios') //Anotação do Swagger para criar tag
+@ApiTags('Usuario') //Anotação do Swagger para criar tag
 @Controller() //Anotação do NestJS para informar que aqui é um controller
 export class CreateUsuarioController {
   constructor(private readonly appserivce: CreateUsuarioService) {}

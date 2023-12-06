@@ -2,7 +2,7 @@ import { Controller, Get, Query, Request } from '@nestjs/common';
 import { GetEntradaService } from './get-entrada.service';
 import { Entrada } from '../../entradas.model';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-@ApiTags("Entradas")
+@ApiTags("Entrada")
 @Controller('get-entrada')
 export class GetEntradaController {
     constructor(private readonly appservice: GetEntradaService){}
