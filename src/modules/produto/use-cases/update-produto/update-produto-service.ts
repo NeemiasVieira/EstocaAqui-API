@@ -34,7 +34,7 @@ export class UpdateProdutoService {
     });
 
     await produtoASerAtualizado.save();
-    this.logger.verbose('200 - Produto atualizado');
+    this.logger.verbose('201 - Produto atualizado');
 
     return {
       mensagem: 'Produto atualizado com sucesso',

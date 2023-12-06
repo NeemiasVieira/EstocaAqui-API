@@ -28,8 +28,12 @@ export class updateProdutoController {
     description: 'Atualiza um produto',
   })
   @ApiResponse({
-    status: 400,
+    status: 404,
     description: 'Erro ao atualizar o produto',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Usuário não autorizado',
   })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)

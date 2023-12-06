@@ -24,6 +24,10 @@ export class CreateProdutoController {
     status: 400,
     description: 'Erro ao criar produto',
   })
+  @ApiResponse({
+    status: 401,
+    description: 'Usuário não autorizado',
+  })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   async criarProduto(

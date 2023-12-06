@@ -14,13 +14,13 @@ export class GetProdutoController {
   constructor(private readonly appserivce: GetProdutoService) {}
 
   @Get()
-  @ApiOperation({ summary: 'Busca produtos cadastrados pelo usuário' })
+  @ApiOperation({ summary: 'Busca produto(s) cadastrado(s) pelo usuário' })
   @ApiResponse({
     status: 201,
-    description: 'Retorna todos os produtos',
+    description: 'Retorna o(s) produto(s) encontrado(s)',
   })
   @ApiResponse({
-    status: 400,
+    status: 404,
     description: 'Erro ao listar o(s) produto(s)',
   })
   @ApiBearerAuth()

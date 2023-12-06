@@ -16,12 +16,16 @@ export class DeleteProdutoController {
   @Delete('/:id')
   @ApiOperation({ summary: 'Deleta o produto selecionado' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Deleta um produto',
   })
   @ApiResponse({
-    status: 400,
+    status: 404,
     description: 'Erro ao deletar o produto',
+  })
+  @ApiResponse({
+    status: 401,
+    description: 'Usuário não autorizado',
   })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)

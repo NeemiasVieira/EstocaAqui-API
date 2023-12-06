@@ -20,7 +20,7 @@ export class GetProdutoService {
         throw new HttpException('Produto não encontrado', 404);
       }
 
-      this.logger.verbose('200 - Produto encontrado');
+      this.logger.verbose('201 - Produto encontrado');
       return {
         mensagem: 'Produto encontrado',
         produto: produto,
@@ -31,7 +31,7 @@ export class GetProdutoService {
       where: { idUsuario: idUsuario },
     });
 
-    this.logger.verbose('200 - Produtos encontrados');
+    this.logger.verbose('201 - Produtos encontrados');
     return {
       mensagem: 'Produtos encontrados',
       produto: todosProdutosUsuario,
