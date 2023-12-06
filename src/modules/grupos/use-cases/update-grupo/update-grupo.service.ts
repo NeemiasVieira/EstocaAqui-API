@@ -9,7 +9,8 @@ export class UpdateGrupoService {
     private readonly logger = new Logger("UpdateGrupoService");
 
     async updateGrupo(id_usuario: string, id_grupo: string, grupoAtualizado: UpdateGrupoDto) : Promise<Grupo>{
-        this.logger.log(`Requisição recebida com sucesso para atualização do grupo ${id_grupo}`)
+
+        this.logger.log(`Tentativa de atualização do grupo ${id_grupo}`)
 
         const grupo = await Grupo.findOne({where: {id: id_grupo}});
         const usuario = await User.findOne({where: {id: id_usuario}});
@@ -29,7 +30,7 @@ export class UpdateGrupoService {
         })
         await grupo.save();
 
-        this.logger.verbose(`Grupo ${id_grupo} atualizado com sucesso!`);
+        this.logger.verbose(`200 - Grupo ${id_grupo} atualizado com sucesso!`);
 
         return grupo;
 
