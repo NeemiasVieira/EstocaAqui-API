@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { DeleteUsuarioService } from './delete-usuario.service';
 
 @ApiTags('Usuario')
-@Controller('delete-usuario')
+@Controller('usuario')
 export class DeleteUsuarioController {
   constructor(private readonly appservice: DeleteUsuarioService) {}
 

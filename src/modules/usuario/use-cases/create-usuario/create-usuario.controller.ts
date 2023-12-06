@@ -5,11 +5,11 @@ import { Usuario } from '../../usuario.model';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Usuario') //Anotação do Swagger para criar tag
-@Controller() //Anotação do NestJS para informar que aqui é um controller
+@Controller("usuario") //Anotação do NestJS para informar que aqui é um controller
 export class CreateUsuarioController {
   constructor(private readonly appserivce: CreateUsuarioService) {}
 
-  @Post('signup') //Anotação do NestJS. O 'signup" é a rota da API.
+  @Post('/signup') //Anotação do NestJS. O 'signup" é a rota da API.
   //As três anotações abaixo são do Swagger, com um resumo do que a rota faz e as possíveis respostas
   @ApiOperation({ summary: 'Cadastro de novo Usuário' })
   @ApiResponse({

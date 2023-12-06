@@ -9,11 +9,11 @@ import {
   } from '@nestjs/swagger';
 
 @ApiTags("Usuario")
-@Controller('login')
+@Controller('usuario')
 export class LoginController {
     constructor(private readonly appservice: LoginService) { }
 
-    @Post()
+    @Post("/login")
     @ApiOperation({summary: "Autenticação de usuário"})
     @ApiResponse({
         status: 200,

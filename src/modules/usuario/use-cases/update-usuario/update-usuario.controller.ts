@@ -4,7 +4,7 @@ import { UpdateUsuarioDto } from './update-usuario.dto';
 import { Usuario } from '../../usuario.model';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
-@Controller('update-usuario')
+@Controller('usuario')
 @ApiTags("Usuario")
 export class UpdateUsuarioController {
     constructor(private readonly appservice : UpdateUsuarioService){}

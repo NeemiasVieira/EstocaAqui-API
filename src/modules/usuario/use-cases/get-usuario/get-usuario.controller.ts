@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Usuario } from '../../usuario.model';
 import { GetUsuarioService } from './get-usuario.service';
 
-@Controller('get-usuario')
+@Controller('usuario')
 @ApiTags("Usuario")
 export class GetUsuarioController {
 
