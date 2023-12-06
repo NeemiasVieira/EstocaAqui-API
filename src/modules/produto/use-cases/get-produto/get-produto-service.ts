@@ -1,33 +1,40 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { Produto } from '../../produto.model';
 
 @Injectable()
 export class GetProdutoService {
+  private readonly logger = new Logger('GetProdutoService');
+
   async getProduto(idUsuario: number, idProduto: number): Promise<object> {
-    try {
-      if (idProduto) {
-        const produto = await Produto.findOne({
-          where: { id: idProduto, idUsuario: idUsuario },
-        });
-        return {
-          mensagem: 'Produto encontrado',
-          produto: produto,
-        };
+    this.logger.log(
+      idProduto ? `Buscando produto pelo id` : `Buscando todos os produtos`,
+    );
+
+    if (idProduto) {
+      const produto = await Produto.findOne({
+        where: { id: idProduto, idUsuario: idUsuario },
+      });
+
+      if (!produto) {
+        this.logger.error('404 - Produto não encontrado');
+        throw new HttpException('Produto não encontrado', 404);
       }
 
-      const todosProdutosUsuario = await Produto.findAll({
-        where: { idUsuario: idUsuario },
-      });
+      this.logger.verbose('200 - Produto encontrado');
       return {
-        mensagem: 'Produtos encontrados',
-        produto: todosProdutosUsuario,
-      };
-    } catch (error) {
-      console.log(error);
-      return {
-        mensagem: 'Erro ao listar',
-        erro: error,
+        mensagem: 'Produto encontrado',
+        produto: produto,
       };
     }
+
+    const todosProdutosUsuario = await Produto.findAll({
+      where: { idUsuario: idUsuario },
+    });
+
+    this.logger.verbose('200 - Produtos encontrados');
+    return {
+      mensagem: 'Produtos encontrados',
+      produto: todosProdutosUsuario,
+    };
   }
 }

@@ -6,7 +6,12 @@ import {
   Request,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { UpdateProdutoDto } from './update-produto-dto';
 import { UpdateProdutoService } from './update-produto-service';
@@ -16,7 +21,7 @@ import { UpdateProdutoService } from './update-produto-service';
 export class updateProdutoController {
   constructor(private readonly appserivce: UpdateProdutoService) {}
 
-  @Patch("/:id")
+  @Patch('/:id')
   @ApiOperation({ summary: 'Atualiza o produto selecionado' })
   @ApiResponse({
     status: 201,
@@ -39,7 +44,7 @@ export class updateProdutoController {
       idProduto,
       novosDadosDoProduto,
     );
-    
+
     return resposta;
   }
 }

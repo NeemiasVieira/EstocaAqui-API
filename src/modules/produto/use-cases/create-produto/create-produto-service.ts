@@ -1,22 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateProdutoDto } from './create-produto-dto';
 import { Produto } from '../../produto.model';
 
 @Injectable()
 export class CreateProdutoService {
+  private readonly logger = new Logger('CreateProdutoService');
+
   async createProduto(
     idUsuario: string,
     produtoASerCadastrado: CreateProdutoDto,
   ): Promise<object> {
-    //Quais serão as regras para criação de produto?
-    
-      const novoProduto = await Produto.create({
-        ...produtoASerCadastrado,
-        idUsuario,
-      });
-      return {
-        mensagem: 'Produto criado com sucesso',
-        produto: novoProduto,
-      };
+    this.logger.log(`Criando novo produto: ${produtoASerCadastrado.nome}`);
+    // Qual as regras de nogócio para criação de novo produto?
+    const novoProduto = await Produto.create({
+      ...produtoASerCadastrado,
+      idUsuario,
+    });
+    this.logger.verbose(`Produto ${novoProduto.nome} criado com sucesso!`);
+    return {
+      mensagem: 'Produto criado com sucesso',
+      produto: novoProduto,
+    };
   }
 }

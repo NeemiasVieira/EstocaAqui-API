@@ -1,5 +1,10 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CreateProdutoService } from './create-produto-service';
 import { CreateProdutoDto } from './create-produto-dto';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
@@ -10,7 +15,7 @@ export class CreateProdutoController {
   constructor(private readonly appserivce: CreateProdutoService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Cadastro de novo Produto' })
+  @ApiOperation({ summary: 'Cadastro de novo produto' })
   @ApiResponse({
     status: 201,
     description: 'Retorna o novo usuário cadastrado',

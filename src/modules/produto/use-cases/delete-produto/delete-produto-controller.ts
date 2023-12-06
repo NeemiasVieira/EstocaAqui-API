@@ -1,5 +1,10 @@
-import { Controller, Delete, Param, Query, Request, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Delete, Param, Request, UseGuards } from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { DeleteProdutoService } from './delete-produto-service';
 
@@ -20,12 +25,8 @@ export class DeleteProdutoController {
   })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  async getProduto(
-    @Request() requisicao: any,
-    @Param('id') idProduto: number,
-  ): Promise<object> {
+  async getProduto(@Request() requisicao: any, @Param('id') idProduto: number) {
     const idUsuario = requisicao.user.subject;
-    const resposta = await this.appserivce.deleteProduto(idUsuario, idProduto);
-    return resposta;
+    await this.appserivce.deleteProduto(idUsuario, idProduto);
   }
 }
