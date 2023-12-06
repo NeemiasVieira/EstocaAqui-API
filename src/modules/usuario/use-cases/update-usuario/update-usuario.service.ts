@@ -1,13 +1,13 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { UpdateUserDto } from './update-user.dto';
-import { User } from '../../user.model';
+import { UpdateUsuarioDto } from './update-usuario.dto';
+import { Usuario } from '../../usuario.model';
 import { hash } from 'bcrypt';
 
 @Injectable()
-export class UpdateUserService {
-    async updateUser(id: string, usuarioAtualizado : UpdateUserDto) : Promise<User>{
+export class UpdateUsuarioService {
+    async updateUsuario(id: string, usuarioAtualizado : UpdateUsuarioDto) : Promise<Usuario>{
         
-        const usuario = await User.findOne({where: {id}});
+        const usuario = await Usuario.findOne({where: {id}});
 
         if(!usuario) throw new HttpException("Usuário não encontrado", 404);
 
