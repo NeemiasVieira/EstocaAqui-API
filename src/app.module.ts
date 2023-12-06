@@ -2,7 +2,7 @@ import { Module, OnApplicationBootstrap, Logger } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { UsuarioModule } from './modules/usuario/usuario.module';
-import { ProdutosModule } from './modules/produtos/produtos.module';
+import { ProdutosModule } from './modules/produto/produto.module';
 import { EntradasModule } from './modules/entradas/entradas.module';
 import { AuthModule } from './middlewares/auth-module/auth-module.module';
 import { FornecedoresModule } from './modules/fornecedores/fornecedores.module';

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString, IsEnum, IsNumber, Min } from 'class-validator';
-import { unidadeDeMedida } from '../produto.model';
+import { unidadeDeMedida } from '../../produto.model';
 
 export class UpdateProdutoDto {
   @ApiProperty({ description: 'Nome do produto', example: 'Coca Cola' })

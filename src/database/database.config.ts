@@ -4,7 +4,7 @@ import { User } from 'src/modules/users/user.model';
 import { Fornecedor } from 'src/modules/fornecedores/fornecedor.model';
 import { Entrada } from 'src/modules/entradas/entradas.model';
 import { Grupo } from 'src/modules/grupos/grupo.model';
-import { Produto } from 'src/modules/produtos/casos-de-uso/produto.model';
+import { Produto } from 'src/modules/produto/use-cases/produto.model';
 
 //Database config
 export const databaseProviders = [
