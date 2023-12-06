@@ -1,12 +1,11 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { CreateGrupoDto } from './create-grupo.dto';
 import { Grupo } from '../../grupo.model';
 import { CreateGrupoService } from './create-grupo.service';
 
-@Controller('create-grupo')
-@ApiTags("Grupos")
+@Controller('grupo')
+@ApiTags("Grupo")
 export class CreateGrupoController {
 
     constructor(private readonly createGrupoService: CreateGrupoService){}

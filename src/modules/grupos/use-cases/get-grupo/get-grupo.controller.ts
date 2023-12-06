@@ -4,7 +4,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Grupo } from '../../grupo.model';
 
 @Controller('get-grupo')
-@ApiTags('Grupos')
+@ApiTags('Grupo')
 export class GetGrupoController {
 
     constructor(private readonly getGrupoService : GetGrupoService){}

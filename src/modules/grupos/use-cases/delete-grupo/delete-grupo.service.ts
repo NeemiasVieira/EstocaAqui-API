@@ -1,11 +1,11 @@
 import { HttpException, Injectable, Logger} from '@nestjs/common';
 import { Grupo } from '../../grupo.model';
-import { User } from 'src/modules/users/user.model';
+import { Usuario } from 'src/modules/usuario/usuario.model';
 
 @Injectable()
 export class DeleteGrupoService {
 
-    private readonly logger = new Logger("DeleteGrupoService");
+    private readonly logger = new Logger("DeleteGrupoervice");
 
     async deleteGrupo(id_grupo: string, id_usuario: string){
 
@@ -13,7 +13,7 @@ export class DeleteGrupoService {
 
         const grupoASerExcluido = await Grupo.findOne({where: {id: id_grupo}});
 
-        const usuario = await User.findOne({where: {id: id_usuario}});
+        const usuario = await Usuario.findOne({where: {id: id_usuario}});
 
         if(!grupoASerExcluido){
             this.logger.error("404 - Grupo não existe");

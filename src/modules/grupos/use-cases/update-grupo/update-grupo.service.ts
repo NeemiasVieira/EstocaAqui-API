@@ -1,7 +1,7 @@
 import { Injectable, Logger, HttpException } from '@nestjs/common';
 import { Grupo } from '../../grupo.model';
 import { UpdateGrupoDto } from './update-grupo.dto';
-import { User } from 'src/modules/users/user.model';
+import { Usuario } from 'src/modules/usuario/usuario.model';
 
 @Injectable()
 export class UpdateGrupoService {
@@ -13,7 +13,7 @@ export class UpdateGrupoService {
         this.logger.log(`Tentativa de atualização do grupo ${id_grupo}`)
 
         const grupo = await Grupo.findOne({where: {id: id_grupo}});
-        const usuario = await User.findOne({where: {id: id_usuario}});
+        const usuario = await Usuario.findOne({where: {id: id_usuario}});
 
         if(!grupo){
             this.logger.error("404 - Grupo não encontrado");

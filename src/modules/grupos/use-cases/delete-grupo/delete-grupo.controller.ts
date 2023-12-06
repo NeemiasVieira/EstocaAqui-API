@@ -4,7 +4,7 @@ import { DeleteGrupoService } from './delete-grupo.service';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('delete-grupo')
-@ApiTags("Grupos")
+@ApiTags("Grupo")
 export class DeleteGrupoController {
 
     constructor(private readonly deleteGrupoService: DeleteGrupoService){}

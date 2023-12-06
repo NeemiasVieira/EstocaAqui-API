@@ -22,4 +22,4 @@ import { GetGrupoService } from './use-cases/get-grupo/get-grupo.service';
     GetGrupoService,
   ],
 })
-export class GruposModule {}
+export class GrupoModule {}
