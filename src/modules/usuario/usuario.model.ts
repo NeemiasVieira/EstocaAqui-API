@@ -1,6 +1,8 @@
 import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 
-@Table
+@Table({
+  tableName: "Usuario"
+})
 export class Usuario extends Model {
   @Column
   nome: string;

@@ -1,6 +1,6 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { UpdateProdutoDto } from './update-produto-dto';
-import { Produto } from '../produto.model';
+import { Produto } from '../../produto.model';
 
 @Injectable()
 export class UpdateProdutoService {

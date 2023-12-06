@@ -4,7 +4,7 @@ import { Usuario } from 'src/modules/usuario/usuario.model';
 import { Fornecedor } from 'src/modules/fornecedores/fornecedor.model';
 import { Entrada } from 'src/modules/entradas/entradas.model';
 import { Grupo } from 'src/modules/grupos/grupo.model';
-import { Produto } from 'src/modules/produtos/casos-de-uso/produto.model';
+import { Produto } from 'src/modules/produtos/produto.model';
 
 //Database config
 export const databaseProviders = [
@@ -12,6 +12,7 @@ export const databaseProviders = [
     provide: 'SEQUELIZE',
     useFactory: async () => {
       const sequelize = new Sequelize({
+        
         logging: false,
         dialect: 'postgres',
         host: process.env.DB_HOST,

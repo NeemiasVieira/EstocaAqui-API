@@ -17,7 +17,9 @@ export enum unidadeDeMedida {
   unidade = 'un',
 }
 
-@Table
+@Table({
+  tableName: "Produto"
+})
 export class Produto extends Model {
   @Column({
     type: DataType.STRING,

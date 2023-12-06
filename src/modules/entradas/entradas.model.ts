@@ -6,7 +6,9 @@ export enum Tipo {
     garantia = "Garantia"
 }
 
-@Table
+@Table({
+  tableName: "Entrada"
+})
 export class Entrada extends Model {
   @Column
   item: number;
