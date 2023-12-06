@@ -6,7 +6,7 @@ import { ProdutosModule } from './modules/produtos/produtos.module';
 import { EntradasModule } from './modules/entradas/entradas.module';
 import { AuthModule } from './middlewares/auth-module/auth-module.module';
 import { FornecedoresModule } from './modules/fornecedores/fornecedores.module';
-import { GrupoModule } from './modules/grupos/grupos.module';
+import { GrupoModule } from './modules/grupos/grupo.module';
 
 @Module({
   imports: [
