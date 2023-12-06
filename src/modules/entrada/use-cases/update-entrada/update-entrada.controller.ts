@@ -4,7 +4,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { Entrada } from '../../entradas.model';
 import { UpdateEntradaDto } from './update-entrada.dto';
 
-@Controller('update-entrada')
+@Controller('entrada')
 @ApiTags("Entrada")
 export class UpdateEntradaController {
     constructor(private readonly appservice: UpdateEntradaService){}

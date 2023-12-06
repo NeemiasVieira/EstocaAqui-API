@@ -5,7 +5,7 @@ import { UpdateFornecedorDto } from './update-fornecedor.dto';
 import { Fornecedor } from '../../fornecedor.model';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
-@Controller('update-fornecedor')
+@Controller('fornecedor')
 @ApiTags("Fornecedor")
 
 export class UpdateFornecedorController {

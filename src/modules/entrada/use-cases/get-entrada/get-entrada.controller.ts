@@ -3,7 +3,7 @@ import { GetEntradaService } from './get-entrada.service';
 import { Entrada } from '../../entradas.model';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 @ApiTags("Entrada")
-@Controller('get-entrada')
+@Controller('entrada')
 export class GetEntradaController {
     constructor(private readonly appservice: GetEntradaService){}
 

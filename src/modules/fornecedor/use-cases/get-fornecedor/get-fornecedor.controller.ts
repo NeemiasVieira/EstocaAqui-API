@@ -4,7 +4,7 @@ import { Fornecedor } from '../../fornecedor.model';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
-@Controller('get-fornecedor')
+@Controller('fornecedor')
 @ApiTags("Fornecedor")
 export class GetFornecedorController {
 

@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagg
 import { DeleteFornecedorService } from './delete-fornecedor.service';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
-@Controller('delete-fornecedor')
+@Controller('fornecedor')
 @ApiTags("Fornecedor")
 export class DeleteFornecedorController {
 

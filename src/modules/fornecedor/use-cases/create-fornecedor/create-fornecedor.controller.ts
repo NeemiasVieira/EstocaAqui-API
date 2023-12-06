@@ -7,7 +7,7 @@ import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @ApiTags("Fornecedor")
 @ApiBearerAuth()
-@Controller('create-fornecedor')
+@Controller('fornecedor')
 export class CreateFornecedorController {
     constructor(private readonly createFornecedorService : CreateFornecedorService){}
     
