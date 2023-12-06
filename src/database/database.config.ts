@@ -3,6 +3,7 @@ import pg from 'pg';
 import { User } from 'src/modules/users/user.model';
 import { Fornecedor } from 'src/modules/fornecedores/fornecedor.model';
 import { Entrada } from 'src/modules/entradas/entradas.model';
+import { Grupo } from 'src/modules/grupos/grupo.model';
 import { Produto } from 'src/modules/produtos/casos-de-uso/produto.model';
 
 //Database config
@@ -11,6 +12,7 @@ export const databaseProviders = [
     provide: 'SEQUELIZE',
     useFactory: async () => {
       const sequelize = new Sequelize({
+        logging: false,
         dialect: 'postgres',
         host: process.env.DB_HOST,
         port: 5432,
@@ -27,7 +29,7 @@ export const databaseProviders = [
       });
 
       //Carrega os modelos do projeto
-      sequelize.addModels([User, Entrada, Fornecedor, Produto]);
+      sequelize.addModels([User, Entrada, Fornecedor, Produto, Grupo]);
       await sequelize.sync();
 
       //Teste de conexão com o banco de dados
