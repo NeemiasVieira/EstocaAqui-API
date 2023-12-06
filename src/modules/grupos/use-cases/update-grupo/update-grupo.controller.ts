@@ -5,7 +5,7 @@ import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { UpdateGrupoDto } from './update-grupo.dto';
 
 @ApiTags("Grupo")
-@Controller('update-grupo')
+@Controller('grupo')
 export class UpdateGrupoController {
     constructor(private readonly updateGrupoService : UpdateGrupoService){}
 

@@ -3,7 +3,7 @@ import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags} from '@nestjs/swagge
 import { DeleteGrupoService } from './delete-grupo.service';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
-@Controller('delete-grupo')
+@Controller('grupo')
 @ApiTags("Grupo")
 export class DeleteGrupoController {
 

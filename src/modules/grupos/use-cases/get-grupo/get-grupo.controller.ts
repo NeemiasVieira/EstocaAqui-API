@@ -3,7 +3,7 @@ import { GetGrupoService } from './get-grupo.service';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Grupo } from '../../grupo.model';
 
-@Controller('get-grupo')
+@Controller('grupo')
 @ApiTags('Grupo')
 export class GetGrupoController {
 
