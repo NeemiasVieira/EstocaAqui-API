@@ -1,5 +1,5 @@
 import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
-import { User } from '../users/user.model';
+import { User } from '../usuario/usuario.model';
 
 export enum Tipo {
     compra = "Compra",

@@ -1,11 +1,11 @@
 import { Controller, Delete, Param } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { DeleteUserService } from './delete-user.service';
+import { DeleteUsuarioService } from './delete-usuario.service';
 
 @ApiTags('Usuarios')
-@Controller('delete-user')
-export class DeleteUserController {
-  constructor(private readonly appservice: DeleteUserService) {}
+@Controller('delete-usuario')
+export class DeleteUsuarioController {
+  constructor(private readonly appservice: DeleteUsuarioService) {}
 
   @Delete('/:id')
   @ApiOperation({summary: "Exclusão de Usuário"})
@@ -18,7 +18,7 @@ export class DeleteUserController {
         description: 'Usuário não encontrado',
     })
 
-  async deleteUser(@Param('id') id: string) {
-    await this.appservice.DeleteUser(id);
+  async deleteUsuario(@Param('id') id: string) {
+    await this.appservice.DeleteUsuario(id);
   }
 }

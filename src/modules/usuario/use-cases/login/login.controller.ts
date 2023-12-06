@@ -1,6 +1,6 @@
 import { Controller, Post, Body, Res} from '@nestjs/common';
 import { LoginService } from './login.service';
-import { LoginUserDto } from './login-dto';
+import { LoginUsuarioDto } from './login-dto';
 import { Response } from "express";
 import {
     ApiOperation,
@@ -23,7 +23,7 @@ export class LoginController {
         status: 400,
         description: 'Usuário ou senha incorretos!',
     })
-    async login(@Body() body: LoginUserDto, @Res() res : Response) {
+    async login(@Body() body: LoginUsuarioDto, @Res() res : Response) {
         const { email, senha } = body;
         const resposta = await this.appservice.login({ email, senha });
         res.status(200).send(resposta);   

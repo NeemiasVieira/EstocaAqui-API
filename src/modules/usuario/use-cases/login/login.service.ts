@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { compare } from "bcrypt"
-import { User } from '../../user.model';
+import { Usuario } from '../../usuario.model';
 import { HttpException } from '@nestjs/common/exceptions';
 import { JwtService } from '@nestjs/jwt';
-import { LoginUserDto } from './login-dto';
+import { LoginUsuarioDto } from './login-dto';
 
 @Injectable()
 export class LoginService {
 
     constructor(private jwtService: JwtService) {}
 
-    async login({ email, senha }: LoginUserDto) {
-        const usuarioExiste = await User.findOne({ where: { email } });
+    async login({ email, senha }: LoginUsuarioDto) {
+        const usuarioExiste = await Usuario.findOne({ where: { email } });
 
         if (!usuarioExiste) throw new HttpException("Usuário ou senha incorretos", 400);
 
