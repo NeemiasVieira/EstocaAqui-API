@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import pg from 'pg';
-import { User } from 'src/modules/users/user.model';
+import { Usuario } from 'src/modules/usuario/usuario.model';
 import { Fornecedor } from 'src/modules/fornecedores/fornecedor.model';
 import { Entrada } from 'src/modules/entradas/entradas.model';
 import { Grupo } from 'src/modules/grupos/grupo.model';
@@ -29,7 +29,7 @@ export const databaseProviders = [
       });
 
       //Carrega os modelos do projeto
-      sequelize.addModels([User, Entrada, Fornecedor, Produto, Grupo]);
+      sequelize.addModels([Usuario, Entrada, Fornecedor, Produto, Grupo]);
       await sequelize.sync();
 
       //Teste de conexão com o banco de dados

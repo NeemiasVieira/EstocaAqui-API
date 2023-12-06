@@ -1,5 +1,5 @@
 import { Column, Model, Table, ForeignKey } from 'sequelize-typescript';
-import { User } from '../usuario/usuario.model';
+import { Usuario } from '../usuario/usuario.model';
 
 @Table
 export class Fornecedor extends Model {
@@ -12,7 +12,7 @@ export class Fornecedor extends Model {
   @Column
   cnpj: string;
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Usuario)
   @Column
   id_usuario: string
 

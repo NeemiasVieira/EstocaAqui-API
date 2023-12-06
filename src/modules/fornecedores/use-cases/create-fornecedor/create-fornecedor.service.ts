@@ -1,6 +1,6 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { CreateFornecedorDto } from './create-fornecedor.dto';
-import { User } from 'src/modules/users/user.model';
+import { Usuario } from 'src/modules/usuario/usuario.model';
 import { Fornecedor } from '../../fornecedor.model';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class CreateFornecedorService {
 
         this.logger.log("Tentativa de criação de fornecedor");
 
-        const usuarioExiste = await User.findOne({where: {id: id_usuario}});
+        const usuarioExiste = await Usuario.findOne({where: {id: id_usuario}});
 
         if(!usuarioExiste){
             this.logger.error("400 - Usuário não existe")

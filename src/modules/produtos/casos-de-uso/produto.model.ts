@@ -6,7 +6,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { User } from 'src/modules/users/user.model';
+import { Usuario } from 'src/modules/usuario/usuario.model';
 
 export enum unidadeDeMedida {
   ml = 'ml',
@@ -50,15 +50,15 @@ export class Produto extends Model {
   })
   quantidade_medida: number;
 
-  @ForeignKey(() => User)
+  @ForeignKey(() => Usuario)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   idUsuario: number;
 
-  @BelongsTo(() => User)
-  user: User;
+  @BelongsTo(() => Usuario)
+  usuario: Usuario;
 
   //Precisa finalizar a questão do fabricante para poder linkar com o produto.
   /* @ForeignKey(() => Fabricante)

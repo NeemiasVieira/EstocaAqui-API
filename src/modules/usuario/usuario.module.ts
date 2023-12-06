@@ -1,15 +1,15 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { CreateUsuarioController } from './use-cases/create-Usuario/create-Usuario.controller';
-import { CreateUsuarioService } from './use-cases/create-Usuario/create-Usuario-service';
+import { CreateUsuarioController } from './use-cases/create-usuario/create-usuario.controller';
+import { CreateUsuarioService } from './use-cases/create-usuario/create-usuario-service';
 import { LoginController } from './use-cases/login/login.controller';
 import { LoginService } from './use-cases/login/login.service';
-import { DeleteUsuarioController } from './use-cases/delete-Usuario/delete-Usuario.controller';
-import { DeleteUsuarioService } from './use-cases/delete-Usuario/delete-Usuario.service';
-import { UpdateUsuarioController } from './use-cases/update-Usuario/update-Usuario.controller';
-import { UpdateUsuarioService } from './use-cases/update-Usuario/update-usuario.service';
-import { GetUsuarioController } from './use-cases/get-Usuario/get-Usuario.controller';
-import { GetUsuarioService } from './use-cases/get-Usuario/get-Usuario.service';
+import { DeleteUsuarioController } from './use-cases/delete-usuario/delete-usuario.controller';
+import { DeleteUsuarioService } from './use-cases/delete-usuario/delete-usuario.service';
+import { UpdateUsuarioController } from './use-cases/update-usuario/update-usuario.controller';
+import { UpdateUsuarioService } from './use-cases/update-usuario/update-usuario.service';
+import { GetUsuarioController } from './use-cases/get-usuario/get-usuario.controller';
+import { GetUsuarioService } from './use-cases/get-usuario/get-usuario.service';
 
 @Module({
   imports: [JwtModule.register({
