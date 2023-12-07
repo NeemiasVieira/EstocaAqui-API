@@ -20,7 +20,7 @@ export class CreateSaidaService {
     this.logger.verbose(`201 - Entrada criada!`);
 
     return {
-      message: 'Saida criada com sucesso',
+      mensagem: 'Saida criada com sucesso',
       saida: novaSaida,
     };
   }
