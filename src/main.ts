@@ -19,10 +19,10 @@ async function bootstrap() {
     .setTitle('EstocaAqui - API')
     .setDescription(APIDescription)
     .setVersion('1.0')
-    .addTag('Usuarios')
-    .addTag('Fornecedores')
-    .addTag('Entradas')
-    .addTag('Grupos')
+    .addTag('Usuario')
+    .addTag('Fornecedor')
+    .addTag('Entrada')
+    .addTag('Grupo')
     .addBearerAuth()
     .build();
 
