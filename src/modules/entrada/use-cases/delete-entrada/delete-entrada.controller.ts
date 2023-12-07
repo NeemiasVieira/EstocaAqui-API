@@ -15,7 +15,7 @@ export class DeleteEntradaController {
     @Delete("/:id")
     async deleteEntrada(@Param("id") id_entrada: string, @Request() requisicao: any){
 
-        const id_usuario = requisicao.user.subject;
+        const id_usuario = requisicao.token.usuario.id;
 
         await this.appservice.deleteEntrada(id_usuario, id_entrada);
 

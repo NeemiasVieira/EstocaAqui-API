@@ -18,7 +18,7 @@ export class UpdateFornecedorController {
     @ApiBearerAuth()
     @UseGuards(AuthGuard)
     async updateFornecedor(@Param("id") id_fornecedor: string, @Body()  fornecedorAtualizado: UpdateFornecedorDto, @Request() requisicao: any) : Promise<Fornecedor>{
-        const id_usuario = requisicao.user.subject
+        const id_usuario = requisicao.token.usuario.id
                  
         return await this.appservice.updateFornecedor(id_fornecedor, fornecedorAtualizado, id_usuario)
     }

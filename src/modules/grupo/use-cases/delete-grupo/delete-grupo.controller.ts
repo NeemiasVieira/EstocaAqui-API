@@ -18,7 +18,7 @@ export class DeleteGrupoController {
     @UseGuards(AuthGuard)
 
     async deleteGrupo(@Param("id") id_grupo: string, @Request() requisicao: any){
-        const id_usuario = requisicao.user.subject;
+        const id_usuario = requisicao.token.usuario.id;
         await this.deleteGrupoService.deleteGrupo(id_grupo, id_usuario);
 
     }

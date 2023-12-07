@@ -34,7 +34,7 @@ export class CreateProdutoController {
     @Request() requisicao: any,
     @Body() novoProduto: CreateProdutoDto,
   ): Promise<object> {
-    const idUsuario = requisicao.user.subject;
+    const idUsuario = requisicao.token.usuario.id;
     const resposta = await this.appserivce.createProduto(
       idUsuario,
       novoProduto,

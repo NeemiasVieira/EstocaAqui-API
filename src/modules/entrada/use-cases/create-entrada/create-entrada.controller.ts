@@ -19,7 +19,7 @@ export class CreateEntradaController {
     @UseGuards(AuthGuard)
 
     async CreateEntrada(@Request() requisicao : any, @Body() entrada : CreateEntradaDto) : Promise<Entrada> {
-        const id_usuario = requisicao.user.subject;
+        const id_usuario = requisicao.token.usuario.id;
         return await this.appservice.CreateEntrada(id_usuario, entrada);
     } 
 

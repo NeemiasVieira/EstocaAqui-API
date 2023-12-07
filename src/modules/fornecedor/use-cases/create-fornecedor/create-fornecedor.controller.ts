@@ -17,7 +17,7 @@ export class CreateFornecedorController {
     @ApiResponse({status: 400, description:"Bad request"})
     @UseGuards(AuthGuard)
     async CriarFornecedor(@Body() body : CreateFornecedorDto, @Request() requisicao: any) : Promise<Fornecedor>{
-        const id_usuario = requisicao.user.subject;
+        const id_usuario = requisicao.token.usuario.id;
         return await this.createFornecedorService.CreateFornecedor(String(id_usuario), body);
     }
 }

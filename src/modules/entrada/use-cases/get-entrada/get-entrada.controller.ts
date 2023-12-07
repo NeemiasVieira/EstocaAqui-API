@@ -13,7 +13,7 @@ export class GetEntradaController {
     @ApiResponse({status: 200, description: "Retorna uma listagem de entradas realizada por aquele usuário"})
     async CreateEntrada (@Query("id") id_entrada : string, @Request() requisicao: any) : Promise<Entrada | Entrada[]>{
 
-        const id_usuario = requisicao.user.subject;
+        const id_usuario = requisicao.token.usuario.id;
     
         return await this.appservice.getEntradas(id_usuario, id_entrada);
         

@@ -29,7 +29,7 @@ export class GetProdutoController {
     @Request() requisicao: any,
     @Query('id') idProduto: number,
   ): Promise<object> {
-    const idUsuario = requisicao.user.subject;
+    const idUsuario = requisicao.token.usuario.id;
     const resposta = await this.appserivce.getProduto(idUsuario, idProduto);
     return resposta;
   }

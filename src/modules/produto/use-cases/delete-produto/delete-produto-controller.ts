@@ -30,7 +30,7 @@ export class DeleteProdutoController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
   async getProduto(@Request() requisicao: any, @Param('id') idProduto: number) {
-    const idUsuario = requisicao.user.subject;
+    const idUsuario = requisicao.token.usuario.id;
     await this.appserivce.deleteProduto(idUsuario, idProduto);
   }
 }

@@ -19,7 +19,7 @@ export class UpdateEntradaController {
     async updateEntrada(@Request() requisicao: any, @Param("id") id_entrada: string,
     @Body() entradaAtualizada : UpdateEntradaDto) : Promise<Entrada>{
 
-        const id_usuario = requisicao.user.subject;
+        const id_usuario = requisicao.token.usuario.id;
 
         return await this.appservice.updateEntrada(id_usuario, id_entrada, entradaAtualizada);
     }
