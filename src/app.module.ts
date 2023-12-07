@@ -7,7 +7,7 @@ import { EntradasModule } from './modules/entrada/entradas.module';
 import { AuthModule } from './middlewares/auth-module/auth-module.module';
 import { FornecedorModule } from './modules/fornecedor/fornecedor.module';
 import { GrupoModule } from './modules/grupo/grupo.module';
-
+import { SaidaModule } from './modules/saida/saida.module';
 
 @Module({
   imports: [
@@ -18,6 +18,7 @@ import { GrupoModule } from './modules/grupo/grupo.module';
     FornecedorModule,
     ProdutosModule,
     GrupoModule,
+    SaidaModule,
   ],
   controllers: [],
   providers: [AuthGuard],
