@@ -5,6 +5,7 @@ import { Fornecedor } from 'src/modules/fornecedor/fornecedor.model';
 import { Entrada } from 'src/modules/entrada/entradas.model';
 import { Grupo } from 'src/modules/grupo/grupo.model';
 import { Produto } from 'src/modules/produto/produto.model';
+import { Saida } from 'src/modules/saida/saida.model';
 
 //Database config
 export const databaseProviders = [
@@ -12,7 +13,6 @@ export const databaseProviders = [
     provide: 'SEQUELIZE',
     useFactory: async () => {
       const sequelize = new Sequelize({
-        
         logging: false,
         dialect: 'postgres',
         host: process.env.DB_HOST,
@@ -30,7 +30,14 @@ export const databaseProviders = [
       });
 
       //Carrega os modelos do projeto
-      sequelize.addModels([Usuario, Entrada, Fornecedor, Produto, Grupo]);
+      sequelize.addModels([
+        Usuario,
+        Entrada,
+        Fornecedor,
+        Produto,
+        Grupo,
+        Saida,
+      ]);
       await sequelize.sync();
 
       //Teste de conexão com o banco de dados
