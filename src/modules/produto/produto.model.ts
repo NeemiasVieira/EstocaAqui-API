@@ -18,7 +18,7 @@ export enum unidadeDeMedida {
 }
 
 @Table({
-  tableName: "Produto"
+  tableName: 'Produto',
 })
 export class Produto extends Model {
   @Column({

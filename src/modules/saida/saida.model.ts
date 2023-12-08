@@ -14,7 +14,7 @@ export enum tipo {
 }
 
 @Table({
-  tableName: 'Saída',
+  tableName: 'Saida',
 })
 export class Saida extends Model {
   @Column({
