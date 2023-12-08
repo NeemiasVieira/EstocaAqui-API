@@ -1,13 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsString, MaxLength } from 'class-validator';
 import { tipo } from '../../saida.model';
+import { ItemEntradaDto } from 'src/modules/entrada/item.dto';
 
 export class CreateSaidaDto {
-  @ApiProperty({ description: 'O que caralhos é item?', example: 666 })
-  @IsNotEmpty({ message: 'O campo item é obrigatório' })
-  @IsNumber()
-  item: number;
-
   @ApiProperty({
     description: 'Tipo do operação',
     example: 'Venda',
@@ -32,10 +28,9 @@ export class CreateSaidaDto {
   @MaxLength(44)
   nf: string;
 
-  @ApiProperty({ description: 'Quantidade do mesmo item', example: 2 })
-  @IsNotEmpty({ message: 'O campo quantidade é obrigatório' })
-  @IsNumber()
-  quantidade: number;
+  @ApiProperty({ description: 'Itens da entrada', type: ItemEntradaDto })
+  @IsNotEmpty({ message: 'O campo item é obrigatório' })
+  item: ItemEntradaDto[];
 
   /* @ApiProperty({ description: 'ID do usuário', example: 1 })
   @IsNotEmpty({ message: 'O campo idUsuario é obrigatório' })

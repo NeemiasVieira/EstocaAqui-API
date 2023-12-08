@@ -7,6 +7,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Usuario } from '../usuario/usuario.model';
+import { ItemSaidaDto } from './item.saida.dto';
 
 export enum tipo {
   venda = 'Venda',
@@ -45,12 +46,13 @@ export class Saida extends Model {
 
   @BelongsTo(() => Usuario)
   usuario: Usuario;
-  //REFAZER AGORA
-  /*  @Column({
+
+  @Column({
     type: DataType.JSON,
     values: Object.values(ItemSaidaDto),
   })
-  item: ItemSaidaDto[]; */
+  item: ItemSaidaDto;
+
   //Linkar com o estoque
   /* @ForeignKey(() => Estoque)
   @Column({
