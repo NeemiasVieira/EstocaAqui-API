@@ -33,14 +33,21 @@ export class AuthGuard implements CanActivate {
       
       const id_usuario = decoded.sub;
       const usuario = await Usuario.findOne({where: {id: id_usuario}});
-      const grupo = await Grupo.findOne({where: {id: usuario.id_grupo}});
+      const grupo = await Grupo.findOne({where: {id: usuario.dataValues.id_grupo}});
+
+      if (!usuario || !grupo){
+        throw new HttpException("Usuário ou grupo não existe", 404);
+      }
 
       request['token'] = { decoded, usuario: usuario.dataValues, grupo: grupo.dataValues};
 
-    } catch(e) {
+    } catch(erro) {
 
-      this.logger.error("Verifique se o usuário e seu grupo são validos!");
-      throw new HttpException('O token de acesso é invalido', 401);
+      if (erro instanceof HttpException){
+        this.logger.error("404 - Usuário ou grupo não existe");
+        throw new HttpException("Usuário ou grupo não existe", 404);
+      }
+      console.log(erro);
     }
     return true;
   }

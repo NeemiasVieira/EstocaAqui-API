@@ -1,7 +1,7 @@
-import { Controller, Get, Query, Request } from '@nestjs/common';
+import { Controller, Get, Query, Request, UseGuards } from '@nestjs/common';
 import { GetEntradaService } from './get-entrada.service';
-import { Entrada } from '../../entradas.model';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/middlewares/auth-module/auth';
 @ApiTags("Entrada")
 @Controller('entrada')
 export class GetEntradaController {
@@ -11,11 +11,12 @@ export class GetEntradaController {
     @ApiBearerAuth()
     @ApiOperation({summary: "Lista todas as entradas criadas pelo usuário"})
     @ApiResponse({status: 200, description: "Retorna uma listagem de entradas realizada por aquele usuário"})
-    async CreateEntrada (@Query("id") id_entrada : string, @Request() requisicao: any) : Promise<Entrada | Entrada[]>{
+    @UseGuards(AuthGuard)
+    async CreateEntrada (@Query("id") id_entrada : string, @Request() requisicao: any) {
 
-        const id_usuario = requisicao.token.usuario.id;
+        const id_grupo = requisicao.token.grupo.id;
     
-        return await this.appservice.getEntradas(id_usuario, id_entrada);
+        return await this.appservice.getEntradas(id_grupo, id_entrada);
         
     }
 }

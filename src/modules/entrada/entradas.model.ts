@@ -1,5 +1,7 @@
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { Usuario } from '../usuario/usuario.model';
+import { ItemEntradaDto } from './item.dto';
+import { Fornecedor } from '../fornecedor/fornecedor.model';
 
 export enum Tipo {
     compra = "Compra",
@@ -10,31 +12,28 @@ export enum Tipo {
   tableName: "Entrada"
 })
 export class Entrada extends Model {
-  @Column
-  item: number;
-
+  
   @Column
   tipo: Tipo;
-
+  
   @Column
   descricao: string;
-
+  
   @Column
   nf: string;
-
+  
   @Column
-  quantidade: number;
+  @ForeignKey(() => Fornecedor)
+  id_fornecedor: string;
 
   @ForeignKey(() => Usuario)
   @Column
   id_usuario: string;
 
-//   @ForeignKey(() => Produto)
-  @Column
-  id_produto: string;
-
-//   @ForeignKey(() => Fabricante)
-  @Column
-  id_fornecedor: string;
+  @Column({
+    values: Object.values(ItemEntradaDto),
+    type: DataType.JSON
+  })
+  item: ItemEntradaDto;
 
 }
