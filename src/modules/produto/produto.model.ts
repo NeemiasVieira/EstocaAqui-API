@@ -59,8 +59,8 @@ export class Produto extends Model {
   })
   idUsuario: number;
 
-  @BelongsTo(() => Usuario)
-  usuario: Usuario;
+  /* @BelongsTo(() => Usuario)
+  usuario: Usuario; */
 
   //Precisa finalizar a questão do fabricante para poder linkar com o produto.
   /* @ForeignKey(() => Fabricante)

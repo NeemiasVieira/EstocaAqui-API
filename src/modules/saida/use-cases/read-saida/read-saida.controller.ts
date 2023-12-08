@@ -1,11 +1,4 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Query,
-  Request,
-  UseGuards,
-} from '@nestjs/common';
+/* import { Controller, Get, Query, Request, UseGuards } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -36,3 +29,4 @@ export class ReadSaidaController {
     return resposta;
   }
 }
+ */
