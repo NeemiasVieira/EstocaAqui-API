@@ -7,9 +7,10 @@ import { GetEntradaService } from './use-cases/get-entrada/get-entrada.service';
 import { CreateEntradaService } from './use-cases/create-entrada/create-entrada.service';
 import { DeleteEntradaService } from './use-cases/delete-entrada/delete-entrada.service';
 import { UpdateEntradaService } from './use-cases/update-entrada/update-entrada.service';
+import { AppService } from 'src/app.service';
 
 @Module({
   controllers: [DeleteEntradaController, UpdateEntradaController, CreateEntradaController, GetEntradaController],
-  providers: [GetEntradaService, CreateEntradaService, DeleteEntradaService, UpdateEntradaService]
+  providers: [GetEntradaService, CreateEntradaService, DeleteEntradaService, UpdateEntradaService, AppService]
 })
 export class EntradasModule {}

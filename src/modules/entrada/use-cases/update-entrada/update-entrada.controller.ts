@@ -20,8 +20,9 @@ export class UpdateEntradaController {
     @Body() entradaAtualizada : UpdateEntradaDto) : Promise<Entrada>{
 
         const id_usuario = requisicao.token.usuario.id;
+        const id_grupo = requisicao.token.grupo.id;
 
-        return await this.appservice.updateEntrada(id_usuario, id_entrada, entradaAtualizada);
+        return await this.appservice.updateEntrada(id_usuario, id_entrada, id_grupo, entradaAtualizada);
     }
     
 }

@@ -24,12 +24,7 @@ export class CreateEntradaDto {
   @IsString()
   id_fornecedor: string;
 
-  @ApiProperty({ description: 'ID do usuário', example: '47' })
-  @IsNotEmpty({ message: 'O campo id_usuario é obrigatório' })
-  @IsNumber()
-  id_usuario: number;
-
   @ApiProperty({ description: 'Itens da entrada', type: ItemEntradaDto })
   @IsNotEmpty({ message: 'O campo item é obrigatório' })
-  item: ItemEntradaDto;
+  item: ItemEntradaDto[];
 }

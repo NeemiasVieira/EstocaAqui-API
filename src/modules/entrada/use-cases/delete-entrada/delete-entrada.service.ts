@@ -1,9 +1,12 @@
 import { HttpException, Injectable, Logger} from '@nestjs/common';
 import { Entrada } from '../../entradas.model';
 import { Usuario } from 'src/modules/usuario/usuario.model';
+import { AppService } from 'src/app.service';
 
 @Injectable()
 export class DeleteEntradaService {
+
+    constructor(private readonly appservice: AppService){}
 
     private readonly logger = new Logger("DeleteEntradaService");
 
@@ -13,17 +16,7 @@ export class DeleteEntradaService {
         
         const entrada = await Entrada.findOne({where: {id: id_entrada}});
 
-        if(!entrada) {
-            this.logger.error("404 - Entrada não encontrada");
-            throw new HttpException("Entrada não encontrada", 404);
-        }
-
-        const usuarioQueCriouAEntrada = await Usuario.findOne({where: {id: entrada.id_usuario}});
-
-        if(id_grupo !== String(usuarioQueCriouAEntrada.id_grupo)) {
-            this.logger.error("401 - Usuário não autorizado");
-            throw new HttpException("Usuário não autorizado", 401);
-        }
+        await this.appservice.verificaEntrada(entrada, id_grupo);        
 
         this.logger.verbose(`200 - Exclusão da entrada ${id_entrada} realizada com sucesso!}`);
 

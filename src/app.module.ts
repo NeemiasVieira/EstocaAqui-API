@@ -8,6 +8,7 @@ import { AuthModule } from './middlewares/auth-module/auth-module.module';
 import { FornecedorModule } from './modules/fornecedor/fornecedor.module';
 import { GrupoModule } from './modules/grupo/grupo.module';
 import { SaidaModule } from './modules/saida/saida.module';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { SaidaModule } from './modules/saida/saida.module';
     SaidaModule,
   ],
   controllers: [],
-  providers: [AuthGuard],
+  providers: [AuthGuard, AppService],
 })
 export class AppModule implements OnApplicationBootstrap {
   private readonly logger = new Logger('EstocaAqui-API');

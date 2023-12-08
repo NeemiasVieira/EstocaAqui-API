@@ -8,6 +8,7 @@ import {
 import { CreateProdutoService } from './create-produto-service';
 import { CreateProdutoDto } from './create-produto-dto';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
+import { emitWarning } from 'process';
 
 @Controller('produto')
 @ApiTags('Produto')

@@ -30,7 +30,7 @@ export class LoginService {
             this.logger.error("401 - Usuário ou senha incorretos");
             throw new HttpException("Usuário ou senha incorretos", 401);
         } 
-
+        
         //No token é armazenado o ID do usuário para usos futuros da aplicação
         const token = this.jwtService.sign({}, { secret: process.env.JWT_SECRET, subject: String(usuarioExiste.id) });
 
