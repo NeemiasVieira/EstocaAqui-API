@@ -1,4 +1,5 @@
-import { Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { Grupo } from '../grupo/grupo.model';
 
 @Table({
   tableName: "Usuario"
@@ -25,9 +26,12 @@ export class Usuario extends Model {
   @Column
   permissao: string;
 
-  //@ForeignKey(() => Grupo)
+  @ForeignKey(() => Grupo)
   @Column
   id_grupo: number;
+
+  @BelongsTo(() => Grupo)
+  grupo: Grupo;
   
 
 }
