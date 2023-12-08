@@ -18,12 +18,6 @@ export enum tipo {
 })
 export class Saida extends Model {
   @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  item: number;
-
-  @Column({
     type: DataType.ENUM,
     allowNull: false,
     values: Object.values(tipo),
@@ -42,12 +36,6 @@ export class Saida extends Model {
   })
   nf: string;
 
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  quantidade: number;
-
   @ForeignKey(() => Usuario)
   @Column({
     type: DataType.INTEGER,
@@ -57,15 +45,20 @@ export class Saida extends Model {
 
   @BelongsTo(() => Usuario)
   usuario: Usuario;
-
+  //REFAZER AGORA
+  /*  @Column({
+    type: DataType.JSON,
+    values: Object.values(ItemSaidaDto),
+  })
+  item: ItemSaidaDto[]; */
   //Linkar com o estoque
-  /* @ForeignKey(() => Usuario)
+  /* @ForeignKey(() => Estoque)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
-  idUsuario: number;
+  idEstoque: number;
 
-  @BelongsTo(() => Usuario)
-  usuario: Usuario; */
+  @BelongsTo(() => Estoque)
+  estoque: Estoque; */
 }
