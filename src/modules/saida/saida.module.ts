@@ -4,9 +4,20 @@ import { CreateSaidaService } from './use-cases/create-saida/create-saida.servic
 import { AppService } from 'src/app.service';
 import { GetSaidaService } from './use-cases/get-saida/get-saida.service';
 import { GetSaidaController } from './use-cases/get-saida/get-saida.controller';
+import { DeleteSaidaController } from './use-cases/delete-saida/delete-saida.controller';
+import { DeleteSaidaService } from './use-cases/delete-saida/delete-saida.service';
 
 @Module({
-  controllers: [CreateSaidaController, GetSaidaController],
-  providers: [CreateSaidaService, GetSaidaService, AppService],
+  controllers: [
+    CreateSaidaController,
+    GetSaidaController,
+    DeleteSaidaController,
+  ],
+  providers: [
+    CreateSaidaService,
+    GetSaidaService,
+    DeleteSaidaService,
+    AppService,
+  ],
 })
 export class SaidaModule {}

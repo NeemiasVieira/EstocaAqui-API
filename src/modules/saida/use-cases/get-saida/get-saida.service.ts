@@ -16,6 +16,7 @@ export class GetSaidaService {
       };
     }
 
+    this.logger.verbose(`200 - Buscando todas as saídas`);
     const usuariosDoMesmoGrupo = await Usuario.findAll({
       where: { id_grupo: id_grupo },
     });

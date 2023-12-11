@@ -6,6 +6,7 @@ import { CreateEntradaDto } from './modules/entrada/use-cases/create-entrada/cre
 import { Entrada } from './modules/entrada/entradas.model';
 import { Grupo } from './modules/grupo/grupo.model';
 import { CreateSaidaDto } from './modules/saida/use-cases/create-saida/create-saida.dto';
+import { Saida } from './modules/saida/saida.model';
 
 @Injectable()
 export class AppService {
@@ -79,11 +80,6 @@ export class AppService {
   }
 
   async verificaEntrada(entrada: Entrada, id_grupo: string): Promise<boolean> {
-    if (!entrada) {
-      this.logger.error('404 - Entrada não encontrada');
-      throw new HttpException('Entrada não encontrada', 404);
-    }
-
     const usuarioQueCriouAEntrada = await Usuario.findOne({
       where: { id: entrada.id_usuario },
     });
