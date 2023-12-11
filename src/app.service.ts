@@ -60,10 +60,6 @@ export class AppService {
         );
       }
 
-      const id_usuarioQueCriouOProduto = produto.idUsuario;
-      const usuarioQueCriouOProduto = await Usuario.findOne({
-        where: { id: id_usuarioQueCriouOProduto },
-      });
       const id_usuarioQueCriouOProduto = produto.id_usuario;
       const usuarioQueCriouOProduto = await Usuario.findOne({
         where: { id: id_usuarioQueCriouOProduto },
@@ -92,10 +88,6 @@ export class AppService {
       where: { id: entrada.id_usuario },
     });
 
-    if (id_grupo != String(usuarioQueCriouAEntrada.id_grupo)) {
-      this.logger.error('401 - Usuário não autorizado');
-      throw new HttpException('Usuário não autorizado', 401);
-    }
     if (id_grupo != String(usuarioQueCriouAEntrada.id_grupo)) {
       this.logger.error('401 - Usuário não autorizado');
       throw new HttpException('Usuário não autorizado', 401);

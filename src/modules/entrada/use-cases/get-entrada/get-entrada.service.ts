@@ -2,7 +2,6 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Entrada } from '../../entradas.model';
 import { Usuario } from 'src/modules/usuario/usuario.model';
 import { Op } from '@sequelize/core';
-import { Grupo } from 'src/modules/grupo/grupo.model';
 
 @Injectable()
 export class GetEntradaService {
@@ -14,14 +13,6 @@ export class GetEntradaService {
   ): Promise<Entrada | Entrada[]> {
     const colaboradores = await Usuario.findAll({ where: { id_grupo } });
 
-    let ids_usuariosNogrupo = colaboradores.map((colaborador) =>
-      String(colaborador.id),
-    );
-
-    if (id_entrada) {
-      this.logger.verbose(`200 - Busca da entrada ${id_entrada} realizada`);
-      return await Entrada.findOne({ where: { id: id_entrada, id_grupo } });
-    }
     let ids_usuariosNogrupo = colaboradores.map((colaborador) =>
       String(colaborador.id),
     );
