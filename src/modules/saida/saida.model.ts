@@ -42,7 +42,7 @@ export class Saida extends Model {
     type: DataType.INTEGER,
     allowNull: false,
   })
-  idUsuario: number;
+  id_usuario: number;
 
   @BelongsTo(() => Usuario)
   usuario: Usuario;

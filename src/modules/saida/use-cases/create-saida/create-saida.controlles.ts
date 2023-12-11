@@ -23,12 +23,12 @@ export class CreateSaidaController {
     @Request() requisicao: any,
     @Body() saidaASerCriada: CreateSaidaDto,
   ): Promise<object> {
-    const idUsuario = requisicao.token.usuario.id;
-    const idGrupo = requisicao.token.grupo.id;
+    const id_usuario = requisicao.token.usuario.id;
+    const id_grupo = requisicao.token.grupo.id;
     const resposta = await this.appservice.createSaida(
-      idUsuario,
+      id_usuario,
       saidaASerCriada,
-      idGrupo,
+      id_grupo,
     );
     return resposta;
   }

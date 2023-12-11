@@ -45,10 +45,10 @@ export class AppService {
   }
 
   async verificaProdutos(
-    entrada: CreateEntradaDto | CreateSaidaDto,
+    objetoComAListaDeProdutos: CreateEntradaDto | CreateSaidaDto,
     id_grupo: string,
   ): Promise<boolean> {
-    for (const item of entrada.item) {
+    for (const item of objetoComAListaDeProdutos.item) {
       const produto = await Produto.findOne({ where: { id: item.id_produto } });
 
       if (!produto) {
