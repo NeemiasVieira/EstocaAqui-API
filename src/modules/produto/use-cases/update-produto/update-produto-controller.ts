@@ -42,9 +42,12 @@ export class updateProdutoController {
     @Param('id') idProduto: number,
     @Body() novosDadosDoProduto: UpdateProdutoDto,
   ): Promise<object> {
-    const idUsuario = requisicao.token.usuario.id;
+    const id_grupo = requisicao.token.grupo.id;
+    const id_usuario = requisicao.token.usuario.id;
+    
     const resposta = await this.appserivce.updateProduto(
-      idUsuario,
+      id_grupo,
+      id_usuario,
       idProduto,
       novosDadosDoProduto,
     );

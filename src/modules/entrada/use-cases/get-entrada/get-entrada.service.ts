@@ -22,6 +22,21 @@ export class GetEntradaService {
       this.logger.verbose(`200 - Busca da entrada ${id_entrada} realizada`);
       return await Entrada.findOne({ where: { id: id_entrada, id_grupo } });
     }
+    let ids_usuariosNogrupo = colaboradores.map((colaborador) =>
+      String(colaborador.id),
+    );
+
+    if (id_entrada) {
+      this.logger.verbose(`200 - Busca da entrada ${id_entrada} realizada`);
+      return await Entrada.findOne({
+        where: {
+          id: id_entrada,
+          id_usuario: {
+            [Op.in]: ids_usuariosNogrupo,
+          },
+        },
+      });
+    }
 
     this.logger.verbose('200 - Busca de entradas realizada');
 

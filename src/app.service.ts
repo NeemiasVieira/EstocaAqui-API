@@ -4,6 +4,7 @@ import { Usuario } from './modules/usuario/usuario.model';
 import { Produto } from './modules/produto/produto.model';
 import { CreateEntradaDto } from './modules/entrada/use-cases/create-entrada/create-entrada.dto';
 import { Entrada } from './modules/entrada/entradas.model';
+import { Grupo } from './modules/grupo/grupo.model';
 import { CreateSaidaDto } from './modules/saida/use-cases/create-saida/create-saida.dto';
 
 @Injectable()
@@ -63,6 +64,10 @@ export class AppService {
       const usuarioQueCriouOProduto = await Usuario.findOne({
         where: { id: id_usuarioQueCriouOProduto },
       });
+      const id_usuarioQueCriouOProduto = produto.id_usuario;
+      const usuarioQueCriouOProduto = await Usuario.findOne({
+        where: { id: id_usuarioQueCriouOProduto },
+      });
 
       if (String(usuarioQueCriouOProduto.id_grupo) != id_grupo) {
         this.logger.error(
@@ -90,6 +95,51 @@ export class AppService {
     if (id_grupo != String(usuarioQueCriouAEntrada.id_grupo)) {
       this.logger.error('401 - Usuário não autorizado');
       throw new HttpException('Usuário não autorizado', 401);
+    }
+    if (id_grupo != String(usuarioQueCriouAEntrada.id_grupo)) {
+      this.logger.error('401 - Usuário não autorizado');
+      throw new HttpException('Usuário não autorizado', 401);
+    }
+
+    return true;
+  }
+
+  async verificaPermissão(
+    objetoDeComparacao: Entrada | Fornecedor | Produto,
+    id_grupo: string,
+    permissaoUsuario?: string,
+    somenteAdmin?: boolean,
+  ) {
+    const usuario = await Usuario.findOne({
+      where: { id: objetoDeComparacao.id_usuario },
+    });
+
+    if (!usuario) {
+      this.logger.error('404 - Usuário não encontrado');
+      throw new HttpException('Usuário não encontrado', 404);
+    }
+
+    if (usuario.id_grupo != Number(id_grupo)) {
+      this.logger.error('401 - Usuário não autorizado');
+      throw new HttpException('Usuário não autorizado', 401);
+    }
+
+    if (somenteAdmin && permissaoUsuario != 'admin') {
+      this.logger.error('401 - Usuário não autorizado');
+      throw new HttpException('Usuário não autorizado', 401);
+    }
+
+    return true;
+  }
+
+  async comparaPermissao(
+    id_usuario: string,
+    id_grupo: string,
+  ): Promise<boolean> {
+    const usuario = await Usuario.findOne({ where: { id: id_usuario } });
+
+    if (usuario.id_grupo != Number(id_grupo)) {
+      return false;
     }
 
     return true;

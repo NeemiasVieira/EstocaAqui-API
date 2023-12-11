@@ -29,8 +29,10 @@ export class GetProdutoController {
     @Request() requisicao: any,
     @Query('id') idProduto: number,
   ): Promise<object> {
-    const idUsuario = requisicao.token.usuario.id;
-    const resposta = await this.appserivce.getProduto(idUsuario, idProduto);
+
+    const id_grupo = requisicao.token.grupo.id;
+
+    const resposta = await this.appserivce.getProduto(id_grupo, idProduto);
     return resposta;
   }
 }

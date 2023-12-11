@@ -7,6 +7,7 @@ import { DeleteProdutoController } from './use-cases/delete-produto/delete-produ
 import { DeleteProdutoService } from './use-cases/delete-produto/delete-produto-service';
 import { updateProdutoController } from './use-cases/update-produto/update-produto-controller';
 import { UpdateProdutoService } from './use-cases/update-produto/update-produto-service';
+import { AppService } from 'src/app.service';
 
 @Module({
   controllers: [
@@ -20,6 +21,7 @@ import { UpdateProdutoService } from './use-cases/update-produto/update-produto-
     GetProdutoService,
     DeleteProdutoService,
     UpdateProdutoService,
+    AppService
   ],
 })
 export class ProdutosModule {}
