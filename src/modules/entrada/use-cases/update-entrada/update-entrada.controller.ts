@@ -1,8 +1,9 @@
-import { Controller, Param, Patch, Request, Body } from '@nestjs/common';
+import { Controller, Param, Patch, Request, Body, UseGuards } from '@nestjs/common';
 import { UpdateEntradaService } from './update-entrada.service';
 import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Entrada } from '../../entradas.model';
 import { UpdateEntradaDto } from './update-entrada.dto';
+import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('entrada')
 @ApiTags("Entrada")
@@ -15,14 +16,14 @@ export class UpdateEntradaController {
     @ApiResponse({status: 404, description: "Entrada não encontrada"})
     @ApiResponse({status: 401, description: "Usuário não autorizado"})
     @Patch("/:id")
+    @UseGuards(AuthGuard)
     
     async updateEntrada(@Request() requisicao: any, @Param("id") id_entrada: string,
     @Body() entradaAtualizada : UpdateEntradaDto) : Promise<Entrada>{
 
-        const id_usuario = requisicao.token.usuario.id;
         const id_grupo = requisicao.token.grupo.id;
 
-        return await this.appservice.updateEntrada(id_usuario, id_entrada, id_grupo, entradaAtualizada);
+        return await this.appservice.updateEntrada(id_entrada, id_grupo, entradaAtualizada);
     }
     
 }

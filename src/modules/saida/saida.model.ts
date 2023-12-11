@@ -51,7 +51,7 @@ export class Saida extends Model {
     type: DataType.JSON,
     values: Object.values(ItemSaidaDto),
   })
-  item: ItemSaidaDto;
+  item: ItemSaidaDto[];
 
   //Linkar com o estoque
   /* @ForeignKey(() => Estoque)
