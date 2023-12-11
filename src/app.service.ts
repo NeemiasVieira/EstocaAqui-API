@@ -80,29 +80,6 @@ export class AppService {
   }
 
   async verificaEntrada(entrada: Entrada, id_grupo: string): Promise<boolean> {
-    if (!entrada) {
-      this.logger.error('404 - Entrada não encontrada');
-      throw new HttpException('Entrada não encontrada', 404);
-    }
-
-    const usuarioQueCriouAEntrada = await Usuario.findOne({
-      where: { id: entrada.id_usuario },
-    });
-
-    if (id_grupo != String(usuarioQueCriouAEntrada.id_grupo)) {
-      this.logger.error('401 - Usuário não autorizado');
-      throw new HttpException('Usuário não autorizado', 401);
-    }
-
-    return true;
-  }
-
-  async verificaSaida(saida: Saida, id_grupo: string): Promise<boolean> {
-    if (!saida) {
-      this.logger.error('404 - Saída não encontrada');
-      throw new HttpException('Saída não encontrada', 404);
-    }
-
     const usuarioQueCriouAEntrada = await Usuario.findOne({
       where: { id: entrada.id_usuario },
     });
