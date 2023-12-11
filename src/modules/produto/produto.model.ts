@@ -7,6 +7,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Usuario } from 'src/modules/usuario/usuario.model';
+import { Grupo } from '../grupo/grupo.model';
 
 export enum unidadeDeMedida {
   ml = 'ml',
@@ -26,6 +27,12 @@ export class Produto extends Model {
     allowNull: false,
   })
   nome: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false
+  })
+  quantidade: number;
 
   @Column({
     type: DataType.STRING,
@@ -61,6 +68,17 @@ export class Produto extends Model {
 
   /* @BelongsTo(() => Usuario)
   usuario: Usuario; */
+
+  @ForeignKey(() => Grupo)
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false
+  })
+
+  id_grupo: number;
+  @BelongsTo(() => Grupo)
+  grupo: Grupo;
+
 
   //Precisa finalizar a questão do fabricante para poder linkar com o produto.
   /* @ForeignKey(() => Fabricante)

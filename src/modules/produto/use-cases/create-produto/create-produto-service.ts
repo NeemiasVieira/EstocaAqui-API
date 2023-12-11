@@ -8,6 +8,7 @@ export class CreateProdutoService {
 
   async createProduto(
     id_usuario: string,
+    id_grupo: number,
     produtoASerCadastrado: CreateProdutoDto,
   ): Promise<object> {
     this.logger.log(`Criando novo produto: ${produtoASerCadastrado.nome}`);    
@@ -15,6 +16,8 @@ export class CreateProdutoService {
     const novoProduto = await Produto.create({
       ...produtoASerCadastrado,
       id_usuario,
+      id_grupo, 
+      quantidade: 0
     });
 
 
