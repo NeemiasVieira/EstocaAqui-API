@@ -1,18 +1,34 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
+import { Op } from '@sequelize/core';
 import { Produto } from '../../produto.model';
+import { Usuario } from 'src/modules/usuario/usuario.model';
 
 @Injectable()
 export class GetProdutoService {
   private readonly logger = new Logger('GetProdutoService');
 
-  async getProduto(idUsuario: number, idProduto: number): Promise<object> {
+  async getProduto(
+    id_grupo: number,
+    idProduto: number,
+  ): Promise<object> {
     this.logger.log(
-      idProduto ? `Buscando produto pelo id` : `Buscando todos os produtos`,
+      idProduto
+        ? `Buscando produto pelo id ${idProduto}`
+        : `Buscando todos os produtos`,
     );
+
+    const usuariosDoGrupo = await Usuario.findAll({ where: { id_grupo } });
+
+    const idsDosUsuariosDoGrupo = usuariosDoGrupo.map((usuario) => usuario.id);
 
     if (idProduto) {
       const produto = await Produto.findOne({
-        where: { id: idProduto, idUsuario: idUsuario },
+        where: {
+          id: idProduto,
+          id_usuario: {
+            [Op.in]: idsDosUsuariosDoGrupo,
+          },
+        },
       });
 
       if (!produto) {
@@ -28,7 +44,11 @@ export class GetProdutoService {
     }
 
     const todosProdutosUsuario = await Produto.findAll({
-      where: { idUsuario: idUsuario },
+      where: {
+        id_usuario: {
+          [Op.in]: idsDosUsuariosDoGrupo,
+        },
+      },
     });
 
     this.logger.verbose('201 - Produtos encontrados');

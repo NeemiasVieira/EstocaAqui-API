@@ -7,16 +7,20 @@ export class CreateProdutoService {
   private readonly logger = new Logger('CreateProdutoService');
 
   async createProduto(
-    idUsuario: string,
+    id_usuario: string,
     produtoASerCadastrado: CreateProdutoDto,
   ): Promise<object> {
-    this.logger.log(`Criando novo produto: ${produtoASerCadastrado.nome}`);
-    // Qual as regras de nogócio para criação de novo produto?
+    this.logger.log(`Criando novo produto: ${produtoASerCadastrado.nome}`);    
+
     const novoProduto = await Produto.create({
       ...produtoASerCadastrado,
-      idUsuario,
+      id_usuario,
     });
+
+
     this.logger.verbose(`Produto ${novoProduto.nome} criado com sucesso!`);
+
+
     return {
       mensagem: 'Produto criado com sucesso',
       produto: novoProduto,

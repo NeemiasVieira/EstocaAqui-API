@@ -1,14 +1,17 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { Produto } from '../../produto.model';
+import { AppService } from 'src/app.service';
 
 @Injectable()
 export class DeleteProdutoService {
   private readonly logger = new Logger('DeleteProdutoService');
 
-  async deleteProduto(idUsuario: number, idProduto: number) {
+  constructor(private readonly appService: AppService){}
+
+  async deleteProduto(id_usuario: number, idProduto: number, id_grupo: string) {
     this.logger.log(`Requisição de exclusão do produto id nº: ${idProduto}`);
     const produtoASerExcluido = await Produto.findOne({
-      where: { id: idProduto, idUsuario: idUsuario },
+      where: { id: idProduto, id_usuario: id_usuario },
     });
 
     if (!produtoASerExcluido) {
@@ -16,13 +19,10 @@ export class DeleteProdutoService {
       throw new HttpException('Produto não existe', 404);
     }
 
-    if (produtoASerExcluido.idUsuario !== idUsuario) {
-      this.logger.error('401 - Não autorizado');
-      throw new HttpException('Usuário não autorizado', 401);
-    }
+    await this.appService.verificaPermissão(produtoASerExcluido, id_grupo);
 
     await Produto.destroy({
-      where: { id: idProduto, idUsuario: idUsuario },
+      where: { id: idProduto, id_usuario: id_usuario },
     });
     this.logger.log('200 - Produto excluído com sucesso');
   }

@@ -1,13 +1,18 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { UpdateProdutoDto } from './update-produto-dto';
 import { Produto } from '../../produto.model';
+import { AppService } from 'src/app.service';
 
 @Injectable()
 export class UpdateProdutoService {
+
+  constructor(private readonly appService: AppService){}
+
   private readonly logger = new Logger('UpdateProdutoService');
 
   async updateProduto(
-    idUsuario: number,
+    id_grupo: number,
+    id_usuario: number,
     idProduto: number,
     novosDadosDoProduto: UpdateProdutoDto,
   ): Promise<object> {
@@ -22,7 +27,7 @@ export class UpdateProdutoService {
       throw new HttpException('Produto não encontrado', 404);
     }
 
-    if (produtoASerAtualizado.idUsuario !== +idUsuario) {
+    if (this.appService.comparaPermissao(String(produtoASerAtualizado.id_usuario), String(id_grupo))) {
       this.logger.error('401 - Usuário não autorizado');
       throw new HttpException('Usuário não autorizado', 401);
     }
@@ -32,6 +37,8 @@ export class UpdateProdutoService {
         produtoASerAtualizado[propriedade] = novosDadosDoProduto[propriedade];
       }
     });
+
+    produtoASerAtualizado.id_usuario = id_usuario;
 
     await produtoASerAtualizado.save();
     this.logger.verbose('201 - Produto atualizado');
