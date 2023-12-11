@@ -1,4 +1,4 @@
-/* import { Controller, Get, Query, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, Request, UseGuards } from '@nestjs/common';
 import {
   ApiBearerAuth,
   ApiOperation,
@@ -6,10 +6,11 @@ import {
   ApiTags,
 } from '@nestjs/swagger';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
+import { GetSaidaService } from './get-saida.service';
 
 @Controller('saida')
 @ApiTags('Saida')
-export class ReadSaidaController {
+export class GetSaidaController {
   constructor(private readonly appservice: GetSaidaService) {}
 
   @Get()
@@ -22,11 +23,10 @@ export class ReadSaidaController {
   @UseGuards(AuthGuard)
   async CreateSaida(
     @Request() requisicao: any,
-    @Query('id') idSaida: number,
+    @Query('id') id_saida: string,
   ): Promise<object> {
-    const idUsuario = requisicao.token.usuario.id;
-    const resposta = await this.appservice.createSaida(idUsuario, idSaida);
+    const id_grupo = requisicao.token.usuario.id_grupo;
+    const resposta = await this.appservice.getSaida(id_grupo, id_saida);
     return resposta;
   }
 }
- */

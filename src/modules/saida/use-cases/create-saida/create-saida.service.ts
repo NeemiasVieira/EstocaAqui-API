@@ -24,7 +24,7 @@ export class CreateSaidaService {
       id_usuario,
     });
 
-    this.logger.verbose(`201 - Entrada criada!`);
+    this.logger.verbose(`201 - Saída criada!`);
 
     return {
       mensagem: 'Saida criada com sucesso',

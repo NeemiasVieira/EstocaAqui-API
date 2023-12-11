@@ -31,9 +31,4 @@ export class CreateSaidaDto {
   @ApiProperty({ description: 'Itens da entrada', type: ItemEntradaDto })
   @IsNotEmpty({ message: 'O campo item é obrigatório' })
   item: ItemEntradaDto[];
-
-  /* @ApiProperty({ description: 'ID do usuário', example: 1 })
-  @IsNotEmpty({ message: 'O campo idUsuario é obrigatório' })
-  @IsNumber()
-  idUsuario: number; */
 }
