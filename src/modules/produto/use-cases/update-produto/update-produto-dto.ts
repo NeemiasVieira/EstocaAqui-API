@@ -1,11 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsEnum, IsNumber, Min } from 'class-validator';
+import { IsNotEmpty, IsString, IsEnum, IsNumber, Min, MinLength, MaxLength, IsOptional } from 'class-validator';
 import { unidadeDeMedida } from '../../produto.model';
 
 export class UpdateProdutoDto {
   @ApiProperty({ description: 'Nome do produto', example: 'Coca Cola' })
   @IsNotEmpty()
   @IsString()
+  @MinLength(2)
+  @MaxLength(90)
   nome: string;
 
   @ApiProperty({ description: 'Tipo do produto', example: 'Refrigerante' })
@@ -17,7 +19,7 @@ export class UpdateProdutoDto {
     description: 'Descrição do produto',
     example: 'Descrição sobre o produto',
   })
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
   descricao: string;
 

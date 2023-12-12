@@ -27,7 +27,7 @@ export class UpdateProdutoService {
       throw new HttpException('Produto não encontrado', 404);
     }
 
-    if (this.appService.comparaPermissao(String(produtoASerAtualizado.id_usuario), String(id_grupo))) {
+    if (!this.appService.comparaPermissao(String(produtoASerAtualizado.id_usuario), String(id_grupo))) {
       this.logger.error('401 - Usuário não autorizado');
       throw new HttpException('Usuário não autorizado', 401);
     }
