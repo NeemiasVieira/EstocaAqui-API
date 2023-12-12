@@ -8,7 +8,7 @@ export class DeleteProdutoService {
 
   constructor(private readonly appService: AppService){}
 
-  async deleteProduto(id_usuario: number, idProduto: number, id_grupo: string) {
+  async deleteProduto(id_usuario: number, idProduto: number, id_grupo: number) {
     this.logger.log(`Requisição de exclusão do produto id nº: ${idProduto}`);
     const produtoASerExcluido = await Produto.findOne({
       where: { id: idProduto, id_usuario: id_usuario },
