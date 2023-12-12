@@ -34,6 +34,6 @@ export class Entrada extends Model {
     values: Object.values(ItemEntradaDto),
     type: DataType.JSON
   })
-  item: ItemEntradaDto;
+  item: ItemEntradaDto[];
 
 }

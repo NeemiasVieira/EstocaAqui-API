@@ -26,6 +26,8 @@ export class CreateSaidaService {
 
     this.logger.verbose(`201 - Saída criada!`);
 
+    await this.appService.subtraiProdutos(dadosDasaidaASerCriada);
+
     return {
       mensagem: 'Saida criada com sucesso',
       saida: novaSaida,

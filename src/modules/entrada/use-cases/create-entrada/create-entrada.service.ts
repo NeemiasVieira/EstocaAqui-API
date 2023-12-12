@@ -30,6 +30,8 @@ export class CreateEntradaService {
             id_usuario
         })
 
+        await this.appService.somaProdutos(entrada);
+
         this.logger.verbose(`201 - Entrada criada com o ID ${novaEntrada.id}`);
 
         return novaEntrada;

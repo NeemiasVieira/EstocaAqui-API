@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, MaxLength } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, MaxLength, IsArray } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Tipo } from '../../entradas.model';
 import { ItemEntradaDto } from '../../item.dto';
@@ -22,13 +22,10 @@ export class UpdateEntradaDto {
   @IsString()
   id_fornecedor: string;
 
-  @ApiProperty({ description: 'ID do usuário', example: '47' })
-  @IsNumber()
-  id_usuario: number;
-
   @ApiProperty({ description: 'Itens da entrada', type: ItemEntradaDto, example: {
     id_produto: 5,
     quantidade: 5
 } })
+  @IsArray()
   item: ItemEntradaDto[];
 }

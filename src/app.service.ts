@@ -4,8 +4,8 @@ import { Usuario } from './modules/usuario/usuario.model';
 import { Produto } from './modules/produto/produto.model';
 import { CreateEntradaDto } from './modules/entrada/use-cases/create-entrada/create-entrada.dto';
 import { Entrada } from './modules/entrada/entradas.model';
-import { Grupo } from './modules/grupo/grupo.model';
 import { CreateSaidaDto } from './modules/saida/use-cases/create-saida/create-saida.dto';
+import { UpdateEntradaDto } from './modules/entrada/use-cases/update-entrada/update-entrada.dto';
 import { Saida } from './modules/saida/saida.model';
 
 @Injectable()
@@ -79,7 +79,29 @@ export class AppService {
     }
   }
 
-  async verificaEntrada(entrada: Entrada, id_grupo: string): Promise<boolean> {
+  async somaProdutos(entrada: CreateEntradaDto | UpdateEntradaDto | Entrada){
+
+    let produto: Produto;
+    for (const item of entrada.item){
+      produto = await Produto.findOne({where: {id: item.id_produto}});
+      produto.quantidade += item.quantidade;
+      await produto.save();
+    }
+
+  }
+
+  async subtraiProdutos(saida: CreateSaidaDto){
+
+    let produto: Produto;
+
+    for (const item of saida.item){
+      produto = await Produto.findOne({where: {id: item.id_produto}});
+      produto.quantidade -= item.quantidade;
+      await produto.save();
+    }
+  }
+
+  async verificaEntrada(entrada: Entrada | Saida, id_grupo: string): Promise<boolean> {
     const usuarioQueCriouAEntrada = await Usuario.findOne({
       where: { id: entrada.id_usuario },
     });
