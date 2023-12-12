@@ -17,12 +17,8 @@ export class UpdateEntradaController {
   @ApiResponse({ status: 401, description: 'Usuário não autorizado' })
   @Patch('/:id')
   @UseGuards(AuthGuard)
-  async updateEntrada(
-    @Request() requisicao: any,
-    @Param('id') id_entrada: string,
-    @Body() entradaAtualizada: UpdateEntradaDto,
-  ): Promise<Entrada> {
-    const id_grupo = requisicao.token.grupo.id;
+  async updateEntrada(@Request() requisicao: any, @Param('id') id_entrada: number, @Body() entradaAtualizada: UpdateEntradaDto): Promise<Entrada> {
+    const id_grupo: number = requisicao.token.grupo.id;
 
     return await this.appservice.updateEntrada(id_entrada, id_grupo, entradaAtualizada);
   }

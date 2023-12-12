@@ -1,4 +1,4 @@
-import { HttpException, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Entrada } from '../../entradas.model';
 import { UpdateEntradaDto } from './update-entrada.dto';
 import { AppService } from 'src/app.service';
@@ -10,12 +10,12 @@ export class UpdateEntradaService {
 
   private readonly logger = new Logger('UpdateEntradaService');
 
-  async updateEntrada(id_entrada: string, id_grupo: string, entradaAtualizada: UpdateEntradaDto): Promise<Entrada> {
+  async updateEntrada(id_entrada: number, id_grupo: number, entradaAtualizada: UpdateEntradaDto): Promise<Entrada> {
     this.logger.log(`Tentativa de atualização da entrada ${id_entrada}`);
 
     const entrada = await Entrada.findOne({ where: { id: id_entrada } });
 
-    await this.appservice.verificaEntrada(entrada, +id_grupo);
+    await this.appservice.verificaEntrada(entrada, id_grupo);
 
     //Subtrai a quantidade anterior do estoque
     let produto: Produto;
