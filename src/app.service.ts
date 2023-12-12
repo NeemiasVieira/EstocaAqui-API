@@ -100,7 +100,7 @@ export class AppService {
   }
 
 
-  async verificaPermissão(objetoDeComparacao: Entrada | Fornecedor | Produto, id_grupo: string, permissaoUsuario?: string, somenteAdmin?: boolean) {
+  async verificaPermissão(objetoDeComparacao: Entrada | Fornecedor | Produto, id_grupo: number, permissaoUsuario?: string, somenteAdmin?: boolean) {
 
     const usuario = await Usuario.findOne({
       where: { id: objetoDeComparacao.id_usuario },
@@ -124,7 +124,7 @@ export class AppService {
     return true;
   }
 
-  async comparaPermissao(id_usuario: string, id_grupo: string): Promise<boolean> {
+  async comparaPermissao(id_usuario: number, id_grupo: number): Promise<boolean> {
     const usuario = await Usuario.findOne({ where: { id: id_usuario } });
 
     if (usuario.id_grupo != Number(id_grupo)) {

@@ -16,10 +16,10 @@ export class UpdateSaidaController {
     @ApiResponse({status: 401, description: "Usuário não autorizado"})
     @Patch("/:id")
     @UseGuards(AuthGuard)
-    async updateSaida(@Request() requisicao: any, @Param("id") id_saida: string,
+    async updateSaida(@Request() requisicao: any, @Param("id") id_saida: number,
     @Body() saidaAtualizada : UpdateSaidaDto) : Promise<Saida>{
         
-        const id_grupo = requisicao.token.grupo.id;
+        const id_grupo: number = requisicao.token.grupo.id;
 
         return await this.updateSaidaService.updateSaida(id_saida, id_grupo, saidaAtualizada);
 

@@ -10,7 +10,7 @@ export class UpdateSaidaService {
   private readonly logger = new Logger('UpdateSaidaService');
 
 
-    async updateSaida(id_saida: string, id_grupo: string, saidaAtualizada: UpdateSaidaDto) : Promise<Saida>{
+    async updateSaida(id_saida: number, id_grupo: number, saidaAtualizada: UpdateSaidaDto) : Promise<Saida>{
 
         this.logger.log(`Tentativa de atualização da saida ${id_saida}`)
 
