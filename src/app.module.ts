@@ -22,7 +22,7 @@ import { AppService } from './app.service';
     SaidaModule,
   ],
   controllers: [],
-  providers: [AuthGuard, AppService],
+  providers: [AppService],
 })
 export class AppModule implements OnApplicationBootstrap {
   private readonly logger = new Logger('EstocaAqui-API');
