@@ -1,11 +1,12 @@
 import { Controller, Request, Param, Body, Patch, UseGuards } from '@nestjs/common';
-import { ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiBearerAuth, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UpdateSaidaService } from './update-saida.service';
 import { Saida } from '../../saida.model';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 import { UpdateSaidaDto } from './update-saida.dto';
 
 @Controller('saida')
+@ApiTags("Saida")
 export class UpdateSaidaController {
     constructor(private readonly updateSaidaService: UpdateSaidaService){}
 
