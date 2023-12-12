@@ -18,8 +18,8 @@ export class UpdateGrupoController {
     @ApiResponse({status: 401, description: "Usuário não autorizado a realizar esta operação"})
     @ApiResponse({status: 404, description: "Grupo não existe"})
 
-    async updateGrupo(@Request() requisicao: any, @Body() grupoAtualizado: UpdateGrupoDto, @Param("id") id_grupo: string){
-        const id_usuario = requisicao.token.usuario.id;
+    async updateGrupo(@Request() requisicao: any, @Body() grupoAtualizado: UpdateGrupoDto, @Param("id") id_grupo: number){
+        const id_usuario: number = requisicao.token.usuario.id;
         return await this.updateGrupoService.updateGrupo(id_usuario, id_grupo, grupoAtualizado);
     }
 

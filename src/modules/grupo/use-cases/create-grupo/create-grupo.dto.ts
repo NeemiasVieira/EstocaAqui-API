@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateGrupoDto {
@@ -6,9 +6,11 @@ export class CreateGrupoDto {
   @IsNotEmpty({ message: 'O campo razao_social é obrigatório' })
   @IsString()
   @MinLength(2)
+  @MaxLength(90)
   razao_social: string;
 
   @ApiProperty({description: 'Nome da marca', example: 'ModalGR', })
+  @MaxLength(90)
   @IsNotEmpty({ message: 'O campo nome_fantasia é obrigatório' })
 
   nome_fantasia: string;
@@ -20,10 +22,12 @@ export class CreateGrupoDto {
   cnpj: string;
 
   @IsString()
+  @IsOptional()
   @ApiProperty({ description: 'LogoTipo do grupo', example: 'https://example.com/logo.png!', })
   logo: string;
 
   @IsString()
+  @IsOptional()
   @ApiProperty({ description: 'Banner do grupo', example: 'https://example.com/banner.png!', })
   banner: string
 } 
