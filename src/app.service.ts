@@ -14,51 +14,37 @@ export class AppService {
 
   constructor() {}
 
-  async verificaFornecedor(
-    id_fornecedor: number,
-    id_grupo: number,
-  ): Promise<boolean> {
+
+  async verificaFornecedor(id_fornecedor: number, id_grupo: number): Promise<boolean> {
     const fornecedor = await Fornecedor.findOne({
       where: { id: id_fornecedor },
     });
 
     if (!fornecedor) {
       this.logger.error(`404 - Fornecedor ${id_fornecedor} não encontrado`);
-      throw new HttpException(
-        `Fornecedor ${id_fornecedor} não encontrado`,
-        404,
-      );
+      throw new HttpException(`Fornecedor ${id_fornecedor} não encontrado`, 404);
     }
 
     const usuarioQueCriouOFornecedor = await Usuario.findOne({
       where: { id: fornecedor.id_usuario },
     });
 
-    if (usuarioQueCriouOFornecedor.id_grupo!= id_grupo) {
-      this.logger.error(
-        `401 - Usuário sem permissão para o Fornecedor ${id_fornecedor}`,
-      );
-      throw new HttpException(
-        `Usuário sem permissão para o Fornecedor ${id_fornecedor}`,
-        401,
-      );
+    if (usuarioQueCriouOFornecedor.id_grupo != id_grupo) {
+      this.logger.error(`401 - Usuário sem permissão para o Fornecedor ${id_fornecedor}`);
+      throw new HttpException(`Usuário sem permissão para o Fornecedor ${id_fornecedor}`, 401);
     }
     return true;
   }
 
-  async verificaProdutos(
-    objetoComAListaDeProdutos: CreateEntradaDto | CreateSaidaDto,
-    id_grupo: number,
-  ): Promise<boolean> {
+
+  async verificaProdutos(objetoComAListaDeProdutos: CreateEntradaDto | CreateSaidaDto, id_grupo: number): Promise<boolean> {
+
     for (const item of objetoComAListaDeProdutos.item) {
       const produto = await Produto.findOne({ where: { id: item.id_produto } });
 
       if (!produto) {
         this.logger.error(`404 - Produto ${item.id_produto} não encontrado`);
-        throw new HttpException(
-          `Produto ${item.id_produto} não encontrado`,
-          404,
-        );
+        throw new HttpException(`Produto ${item.id_produto} não encontrado`, 404);
       }
 
       const id_usuarioQueCriouOProduto = produto.id_usuario;
@@ -67,46 +53,40 @@ export class AppService {
       });
 
       if (usuarioQueCriouOProduto.id_grupo != id_grupo) {
-        this.logger.error(
-          `401 - Usuário sem autorização para o Produto ${item.id_produto}`,
-        );
-        throw new HttpException(
-          `Usuário sem autorização para o Produto ${item.id_produto}`,
-          401,
-        );
+
+        this.logger.error(`401 - Usuário sem autorização para o Produto ${item.id_produto}`);
+        throw new HttpException(`Usuário sem autorização para o Produto ${item.id_produto}`, 401);
+
       }
       return true;
     }
   }
 
-  async somaProdutos(entrada: CreateEntradaDto | UpdateEntradaDto | Entrada){
-
+  async somaProdutos(entrada: CreateEntradaDto | UpdateEntradaDto | Entrada) {
     let produto: Produto;
-    for (const item of entrada.item){
-      produto = await Produto.findOne({where: {id: item.id_produto}});
+    for (const item of entrada.item) {
+      produto = await Produto.findOne({ where: { id: item.id_produto } });
       produto.quantidade += item.quantidade;
       await produto.save();
     }
-
   }
 
-  async subtraiProdutos(saida: CreateSaidaDto){
-
+  async subtraiProdutos(saida: CreateSaidaDto) {
     let produto: Produto;
 
-    for (const item of saida.item){
-      produto = await Produto.findOne({where: {id: item.id_produto}});
+    for (const item of saida.item) {
+      produto = await Produto.findOne({ where: { id: item.id_produto } });
       produto.quantidade -= item.quantidade;
       await produto.save();
     }
   }
 
-  async verificaEntrada(entrada: Entrada | Saida, id_grupo: string): Promise<boolean> {
+  async verificaEntrada(entrada: Entrada | Saida, id_grupo: number): Promise<boolean> {
     const usuarioQueCriouAEntrada = await Usuario.findOne({
       where: { id: entrada.id_usuario },
     });
 
-    if (id_grupo != String(usuarioQueCriouAEntrada.id_grupo)) {
+    if (id_grupo != usuarioQueCriouAEntrada.id_grupo) {
       this.logger.error('401 - Usuário não autorizado');
       throw new HttpException('Usuário não autorizado', 401);
     }
@@ -114,12 +94,9 @@ export class AppService {
     return true;
   }
 
-  async verificaPermissão(
-    objetoDeComparacao: Entrada | Fornecedor | Produto,
-    id_grupo: number,
-    permissaoUsuario?: string,
-    somenteAdmin?: boolean,
-  ) {
+
+  async verificaPermissão(objetoDeComparacao: Entrada | Fornecedor | Produto, id_grupo: string, permissaoUsuario?: string, somenteAdmin?: boolean) {
+
     const usuario = await Usuario.findOne({
       where: { id: objetoDeComparacao.id_usuario },
     });
@@ -142,10 +119,8 @@ export class AppService {
     return true;
   }
 
-  async comparaPermissao(
-    id_usuario: number,
-    id_grupo: number,
-  ): Promise<boolean> {
+
+  async comparaPermissao(id_usuario: string, id_grupo: string): Promise<boolean> {
     const usuario = await Usuario.findOne({ where: { id: id_usuario } });
 
     if (usuario.id_grupo != Number(id_grupo)) {

@@ -5,24 +5,30 @@ import { Fornecedor } from '../../fornecedor.model';
 
 @Injectable()
 export class CreateFornecedorService {
+  private readonly logger = new Logger('CreateFornecedorService');
 
-    private readonly logger = new Logger("CreateFornecedorService");
+  async CreateFornecedor(
+    id_usuario: number,
+    FornecedorDTO: CreateFornecedorDto,
+  ): Promise<Fornecedor> {
+    this.logger.log('Tentativa de criação de fornecedor');
 
-    async CreateFornecedor(id_usuario: string, FornecedorDTO: CreateFornecedorDto) : Promise<Fornecedor>{
+    const usuarioExiste = await Usuario.findOne({ where: { id: id_usuario } });
 
-        this.logger.log("Tentativa de criação de fornecedor");
-
-        const usuarioExiste = await Usuario.findOne({where: {id: id_usuario}});
-
-        if(!usuarioExiste){
-            this.logger.error("400 - Usuário não existe")
-            throw new HttpException("Usuário não existe", 400);
-        } 
-
-        const novoFornecedor = await Fornecedor.create({ ...FornecedorDTO, id_usuario });
-
-        this.logger.verbose(`201 - Novo fornecedor cadastrado com sucesso com ID: ${novoFornecedor.id}`);
-
-        return novoFornecedor;
+    if (!usuarioExiste) {
+      this.logger.error('400 - Usuário não existe');
+      throw new HttpException('Usuário não existe', 400);
     }
+
+    const novoFornecedor = await Fornecedor.create({
+      ...FornecedorDTO,
+      id_usuario,
+    });
+
+    this.logger.verbose(
+      `201 - Novo fornecedor cadastrado com sucesso com ID: ${novoFornecedor.id}`,
+    );
+
+    return novoFornecedor;
+  }
 }

@@ -9,7 +9,17 @@ import { DeleteFornecedorController } from './use-cases/delete-fornecedor/delete
 import { DeleteFornecedorService } from './use-cases/delete-fornecedor/delete-fornecedor.service';
 
 @Module({
-  controllers: [CreateFornecedorController, GetFornecedorController, UpdateFornecedorController, DeleteFornecedorController],
-  providers: [CreateFornecedorService, GetFornecedorService, UpdateFornecedorService, DeleteFornecedorService]
+  controllers: [
+    CreateFornecedorController,
+    GetFornecedorController,
+    UpdateFornecedorController,
+    DeleteFornecedorController,
+  ],
+  providers: [
+    CreateFornecedorService,
+    GetFornecedorService,
+    UpdateFornecedorService,
+    DeleteFornecedorService,
+  ],
 })
 export class FornecedorModule {}

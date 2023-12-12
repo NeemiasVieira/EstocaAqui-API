@@ -11,6 +11,6 @@ import { AppService } from 'src/app.service';
 
 @Module({
   controllers: [DeleteEntradaController, UpdateEntradaController, CreateEntradaController, GetEntradaController],
-  providers: [GetEntradaService, CreateEntradaService, DeleteEntradaService, UpdateEntradaService, AppService]
+  providers: [GetEntradaService, CreateEntradaService, DeleteEntradaService, UpdateEntradaService, AppService],
 })
 export class EntradasModule {}
