@@ -1,11 +1,4 @@
-import {
-  BelongsTo,
-  Column,
-  DataType,
-  ForeignKey,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { Usuario } from '../usuario/usuario.model';
 import { ItemSaidaDto } from './item.saida.dto';
 
@@ -27,13 +20,12 @@ export class Saida extends Model {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
   })
   descricao: string;
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   nf: string;
 
@@ -53,14 +45,4 @@ export class Saida extends Model {
   })
   item: ItemSaidaDto[];
 
-  //Linkar com o estoque
-  /* @ForeignKey(() => Estoque)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  idEstoque: number;
-
-  @BelongsTo(() => Estoque)
-  estoque: Estoque; */
 }

@@ -18,6 +18,7 @@ export class UpdateSaidaController {
     @UseGuards(AuthGuard)
     async updateSaida(@Request() requisicao: any, @Param("id") id_saida: string,
     @Body() saidaAtualizada : UpdateSaidaDto) : Promise<Saida>{
+        
         const id_grupo = requisicao.token.grupo.id;
 
         return await this.updateSaidaService.updateSaida(id_saida, id_grupo, saidaAtualizada);
