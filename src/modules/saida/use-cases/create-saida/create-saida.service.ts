@@ -8,7 +8,9 @@ export class CreateSaidaService {
   constructor(private readonly appService: AppService) {}
   private readonly logger = new Logger('CreateSaidaService');
 
-  async createSaida(id_usuario: string, id_grupo: number, dadosDasaidaASerCriada: CreateSaidaDto): Promise<Saida> {
+
+  async createSaida(id_usuario: number, id_grupo: number, dadosDasaidaASerCriada: CreateSaidaDto): Promise<Saida> {
+
     this.logger.log('Tentativa de criação de saida');
 
     await this.appService.verificaProdutos(dadosDasaidaASerCriada, id_grupo);

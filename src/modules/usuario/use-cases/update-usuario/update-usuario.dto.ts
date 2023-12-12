@@ -1,4 +1,4 @@
-import { IsString, IsStrongPassword, MinLength, IsEmail} from 'class-validator';
+import { IsString, IsStrongPassword, MinLength, IsEmail, IsOptional, MaxLength} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class UpdateUsuarioDto {
@@ -8,7 +8,8 @@ export class UpdateUsuarioDto {
   })
 
   @IsString()
-  @MinLength(8)
+  @MinLength(2)
+  @MaxLength(90)
   nome: string;
 
   @ApiProperty({
@@ -25,6 +26,8 @@ export class UpdateUsuarioDto {
   })
 
   @IsString()
+  @MinLength(14)
+  @MaxLength(20)
   telefone: string;
 
   @ApiProperty({
@@ -46,6 +49,7 @@ export class UpdateUsuarioDto {
     example: 'https://example.imagem.img',
   })
   @IsString()
+  @IsOptional()
   imagem_de_perfil?: string;
 
   @ApiProperty({

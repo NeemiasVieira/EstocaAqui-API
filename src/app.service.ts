@@ -14,6 +14,7 @@ export class AppService {
 
   constructor() {}
 
+
   async verificaFornecedor(id_fornecedor: number, id_grupo: number): Promise<boolean> {
     const fornecedor = await Fornecedor.findOne({
       where: { id: id_fornecedor },
@@ -35,10 +36,10 @@ export class AppService {
     return true;
   }
 
-  async verificaProdutos(
-    objetoComAListaDeProdutos: CreateEntradaDto | CreateSaidaDto,
-    id_grupo: number,
-  ): Promise<boolean> {
+
+
+  async verificaProdutos(objetoComAListaDeProdutos: CreateEntradaDto | CreateSaidaDto, id_grupo: number): Promise<boolean> {
+    
     for (const item of objetoComAListaDeProdutos.item) {
       const produto = await Produto.findOne({ where: { id: item.id_produto } });
 
@@ -53,6 +54,7 @@ export class AppService {
       });
 
       if (usuarioQueCriouOProduto.id_grupo != id_grupo) {
+
         this.logger.error(`401 - Usuário sem autorização para o Produto ${item.id_produto}`);
         throw new HttpException(`Usuário sem autorização para o Produto ${item.id_produto}`, 401);
       }
@@ -69,23 +71,27 @@ export class AppService {
     }
   }
 
+
   async subtraiProdutos(saida: CreateSaidaDto | Saida, reverso = false) {
+
     let produto: Produto;
 
     for (const item of saida.item) {
       produto = await Produto.findOne({ where: { id: item.id_produto } });
+
       if(reverso) produto.quantidade += item.quantidade;
       if(!reverso) produto.quantidade -= item.quantidade;
+
       await produto.save();
     }
   }
 
-  async verificaEntrada(entrada: Entrada | Saida, id_grupo: string): Promise<boolean> {
+  async verificaEntrada(entrada: Entrada | Saida, id_grupo: number): Promise<boolean> {
     const usuarioQueCriouAEntrada = await Usuario.findOne({
       where: { id: entrada.id_usuario },
     });
 
-    if (id_grupo != String(usuarioQueCriouAEntrada.id_grupo)) {
+    if (id_grupo != usuarioQueCriouAEntrada.id_grupo) {
       this.logger.error('401 - Usuário não autorizado');
       throw new HttpException('Usuário não autorizado', 401);
     }
@@ -93,12 +99,9 @@ export class AppService {
     return true;
   }
 
-  async verificaPermissão(
-    objetoDeComparacao: Entrada | Fornecedor | Produto,
-    id_grupo: string,
-    permissaoUsuario?: string,
-    somenteAdmin?: boolean,
-  ) {
+
+  async verificaPermissão(objetoDeComparacao: Entrada | Fornecedor | Produto, id_grupo: string, permissaoUsuario?: string, somenteAdmin?: boolean) {
+
     const usuario = await Usuario.findOne({
       where: { id: objetoDeComparacao.id_usuario },
     });

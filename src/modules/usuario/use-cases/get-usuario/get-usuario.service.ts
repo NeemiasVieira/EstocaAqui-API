@@ -6,7 +6,7 @@ export class GetUsuarioService {
 
   private readonly logger = new Logger("GetUsuarioService")
       
-  async getUsuario(id: string): Promise<Usuario | Usuario[]> {
+  async getUsuario(id: number): Promise<Usuario | Usuario[]> {
     
     if (id) {
       this.logger.verbose(`200 - Busca pelo usuário ${id}`);
