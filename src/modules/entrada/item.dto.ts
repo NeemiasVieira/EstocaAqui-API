@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class ItemEntradaDto {
   @ApiProperty({ description: 'Número do id_produto', example: 5 })
-  @IsNotEmpty({message: "O campo id_produto é obrigatório"})
+  @IsNotEmpty({ message: 'O campo id_produto é obrigatório' })
   @IsNumber()
   id_produto: number;
 
