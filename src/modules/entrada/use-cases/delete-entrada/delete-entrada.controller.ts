@@ -1,11 +1,6 @@
 import { Controller, Delete, Param, Request, UseGuards } from '@nestjs/common';
 import { DeleteEntradaService } from './delete-entrada.service';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('entrada')
@@ -20,14 +15,9 @@ export class DeleteEntradaController {
   @ApiResponse({ status: 401, description: 'Usuário não autorizado' })
   @UseGuards(AuthGuard)
   @Delete('/:id')
-  async deleteEntrada(
-    @Param('id') id_entrada: string,
-    @Request() requisicao: any,
-  ) {
-    const id_usuario = requisicao.token.usuario.id;
+  async deleteEntrada(@Param('id') id_entrada: string, @Request() requisicao: any) {
+    const id_grupo: number = requisicao.token.grupo.id;
 
-    const id_grupo = requisicao.token.grupo.id;
-
-    await this.appservice.deleteEntrada(id_usuario, id_grupo, id_entrada);
+    await this.appservice.deleteEntrada(id_grupo, id_entrada);
   }
 }

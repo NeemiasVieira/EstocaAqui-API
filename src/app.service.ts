@@ -76,12 +76,12 @@ export class AppService {
     }
   }
 
-  async verificaEntrada(entrada: Entrada | Saida, id_grupo: string): Promise<boolean> {
+  async verificaEntrada(entrada: Entrada | Saida, id_grupo: number): Promise<boolean> {
     const usuarioQueCriouAEntrada = await Usuario.findOne({
       where: { id: entrada.id_usuario },
     });
 
-    if (id_grupo != String(usuarioQueCriouAEntrada.id_grupo)) {
+    if (id_grupo != usuarioQueCriouAEntrada.id_grupo) {
       this.logger.error('401 - Usuário não autorizado');
       throw new HttpException('Usuário não autorizado', 401);
     }
