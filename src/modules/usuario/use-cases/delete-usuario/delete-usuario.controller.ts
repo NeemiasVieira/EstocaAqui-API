@@ -18,7 +18,7 @@ export class DeleteUsuarioController {
         description: 'Usuário não encontrado',
     })
 
-  async deleteUsuario(@Param('id') id: string) {
+  async deleteUsuario(@Param('id') id: number) {
     await this.appservice.DeleteUsuario(id);
   }
 }
