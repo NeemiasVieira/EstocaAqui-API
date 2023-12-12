@@ -15,10 +15,9 @@ export class DeleteSaidaController {
   @ApiResponse({ status: 401, description: 'Usuário não autorizado' })
   @UseGuards(AuthGuard)
   @Delete('/:id')
-  async deleteSaida(@Param('id') id_saida: string, @Request() requisicao: any) {
-
-    const id_usuario = requisicao.token.usuario.id;
-    const id_grupo = requisicao.token.grupo.id;
+  async deleteSaida(@Param('id') id_saida: number, @Request() requisicao: any) {
+    const id_usuario: number = requisicao.token.usuario.id;
+    const id_grupo: number = requisicao.token.grupo.id;
 
     return await this.appService.deletaSaida(id_usuario, id_grupo, id_saida);
   }
