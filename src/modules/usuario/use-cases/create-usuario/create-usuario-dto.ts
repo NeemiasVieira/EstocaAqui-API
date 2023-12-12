@@ -1,11 +1,12 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString, IsStrongPassword, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, IsStrongPassword, MaxLength, MinLength } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUsuarioDto {
   @ApiProperty({ description: 'Nome completo do usuário', example: "Gabriel Farias da Silva" })
   @IsNotEmpty()
   @IsString()
-  @MinLength(8)
+  @MinLength(2)
+  @MaxLength(90)
   nome: string;
 
   @ApiProperty({
@@ -19,6 +20,8 @@ export class CreateUsuarioDto {
   @ApiProperty({description: "Telefone do usuário", example: "(13) 99702-3584"})
   @IsNotEmpty({message: "O campo telefone é obrigatório"})
   @IsString()
+  @MinLength(14)
+  @MaxLength(20)
   telefone: string;
 
 
@@ -37,12 +40,15 @@ export class CreateUsuarioDto {
   senha: string;
 
   @ApiProperty({ description: 'Link da imagem de perfil do usuário' , example: "https://example.imagem.img"})
+  @IsOptional()
   @IsString()
   imagem_de_perfil?: string;
 
   @ApiProperty({ description: 'CPF do usuário', example: "403.854.234/31" })
   @IsNotEmpty()
   @IsString()
+  @MinLength(11)
+  @MaxLength(11)
   cpf: string;
 
   @ApiProperty({ description: 'Grupo de permissão do usuário', example: "admin" })
