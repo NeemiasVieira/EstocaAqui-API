@@ -12,7 +12,7 @@ export class GetGrupoController {
     @Get()
     @ApiOperation({summary: "Lista um ou todos os grupos"})
     @ApiResponse({status: 200, description: "Retorna um ou todos os grupos"})
-    async getGrupo(@Query("id") id_grupo: string) : Promise<Grupo | Grupo[]>{
+    async getGrupo(@Query("id") id_grupo: number) : Promise<Grupo | Grupo[]>{
 
         return await this.getGrupoService.getGrupo(id_grupo);
     }

@@ -17,8 +17,9 @@ export class DeleteGrupoController {
     @ApiResponse({status: 404, description: "Grupo não encontrado"})
     @UseGuards(AuthGuard)
 
-    async deleteGrupo(@Param("id") id_grupo: string, @Request() requisicao: any){
-        const id_usuario = requisicao.token.usuario.id;
+    async deleteGrupo(@Param("id") id_grupo: number, @Request() requisicao: any){
+
+        const id_usuario: number = requisicao.token.usuario.id;
         await this.deleteGrupoService.deleteGrupo(id_grupo, id_usuario);
 
     }

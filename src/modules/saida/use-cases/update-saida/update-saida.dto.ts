@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsString, MaxLength } from 'class-validator';
+import { IsArray, IsOptional, IsString, MaxLength } from 'class-validator';
 import { tipo } from '../../saida.model';
 import { ItemEntradaDto } from 'src/modules/entrada/item.dto';
 
@@ -9,6 +9,7 @@ export class UpdateSaidaDto {
     example: 'Venda',
   })
   @IsString()
+  @IsOptional()
   tipo: tipo;
 
   @ApiProperty({
@@ -17,6 +18,7 @@ export class UpdateSaidaDto {
   })
   @IsString()
   @MaxLength(250)
+  @IsOptional()
   descricao: string;
 
   @ApiProperty({
@@ -25,9 +27,11 @@ export class UpdateSaidaDto {
   })
   @IsString()
   @MaxLength(44)
+  @IsOptional()
   nf: string;
 
   @ApiProperty({ description: 'Itens da entrada', type: ItemEntradaDto })
   @IsArray()
+  @IsOptional()
   item: ItemEntradaDto[];
 }

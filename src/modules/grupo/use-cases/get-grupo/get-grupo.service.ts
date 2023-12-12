@@ -7,7 +7,7 @@ export class GetGrupoService {
 
     private readonly logger = new Logger('GetGrupoService');
 
-    async getGrupo(id_grupo: string) : Promise<Grupo | Grupo[]>{
+    async getGrupo(id_grupo: number) : Promise<Grupo | Grupo[]>{
         this.logger.log(id_grupo ? `Buscando pelo ID ${id_grupo}` : "Buscando todos os grupos");
 
         if (id_grupo) {

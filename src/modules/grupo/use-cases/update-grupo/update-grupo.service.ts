@@ -8,7 +8,7 @@ export class UpdateGrupoService {
 
     private readonly logger = new Logger("UpdateGrupoService");
 
-    async updateGrupo(id_usuario: string, id_grupo: string, grupoAtualizado: UpdateGrupoDto) : Promise<Grupo>{
+    async updateGrupo(id_usuario: number, id_grupo: number, grupoAtualizado: UpdateGrupoDto) : Promise<Grupo>{
 
         this.logger.log(`Tentativa de atualização do grupo ${id_grupo}`)
 
@@ -28,6 +28,7 @@ export class UpdateGrupoService {
         Object.keys(grupoAtualizado).forEach((chave) => {
             grupo[chave] = grupoAtualizado[chave];
         })
+        
         await grupo.save();
 
         this.logger.verbose(`200 - Grupo ${id_grupo} atualizado com sucesso!`);

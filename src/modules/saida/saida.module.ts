@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { CreateSaidaController } from './use-cases/create-saida/create-saida.controlles';
+import { CreateSaidaController } from './use-cases/create-saida/create-saida.controller';
 import { CreateSaidaService } from './use-cases/create-saida/create-saida.service';
 import { AppService } from 'src/app.service';
 import { GetSaidaService } from './use-cases/get-saida/get-saida.service';

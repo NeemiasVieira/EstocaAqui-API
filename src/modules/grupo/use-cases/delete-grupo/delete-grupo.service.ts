@@ -7,7 +7,7 @@ export class DeleteGrupoService {
 
     private readonly logger = new Logger("DeleteGrupoervice");
 
-    async deleteGrupo(id_grupo: string, id_usuario: string){
+    async deleteGrupo(id_grupo: number, id_usuario: number){
 
         this.logger.log(`Requisição de exclusão do grupo ${id_grupo}`);
 

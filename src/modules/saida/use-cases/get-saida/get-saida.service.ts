@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { HttpException, Injectable, Logger } from '@nestjs/common';
 import { Usuario } from 'src/modules/usuario/usuario.model';
 import { Saida } from '../../saida.model';
 
@@ -6,32 +6,35 @@ import { Saida } from '../../saida.model';
 export class GetSaidaService {
   private readonly logger = new Logger('GetSaidaService');
 
-  async getSaida(id_grupo: string, id_saida?: string): Promise<object> {
+  async getSaida(id_grupo: number, id_saida?: number): Promise<Saida[] | Saida> {
+
     if (id_saida) {
       this.logger.verbose(`200 - Busca da saída ${id_saida} realizada`);
+
       const saidaEncontrada = await Saida.findOne({ where: { id: id_saida } });
-      return {
-        message: 'Saída encontrada',
-        dados: saidaEncontrada,
-      };
+
+      const usuarioQueCriouASaida = await Usuario.findOne({ where: { id: saidaEncontrada.id_usuario } });
+
+      if (!saidaEncontrada) {
+        this.logger.error('404 - Saída não encontrada');
+        throw new HttpException('Saída não encontrada', 404);
+      }
+
+      if (usuarioQueCriouASaida.id_grupo != id_grupo) {
+        this.logger.error('401 - Usuário não autorizado');
+        throw new HttpException('Usuário não autorizado', 401);
+      }
+
+      return saidaEncontrada;
     }
 
     this.logger.verbose(`200 - Buscando todas as saídas`);
-    const usuariosDoMesmoGrupo = await Usuario.findAll({
-      where: { id_grupo: id_grupo },
-    });
 
-    const idsDeTodosOsUsuariosDoMesmoGrupo = usuariosDoMesmoGrupo.map(
-      (usuario) => String(usuario.id),
-    );
+    const usuariosDoMesmoGrupo = await Usuario.findAll({ where: { id_grupo: id_grupo }});
 
-    const saidasDoGrupo = await Saida.findAll({
-      where: { id_usuario: idsDeTodosOsUsuariosDoMesmoGrupo },
-    });
+    const idsDeTodosOsUsuariosDoMesmoGrupo = usuariosDoMesmoGrupo.map((usuario) => String(usuario.id));
 
-    return {
-      message: 'Todas saídas encontradas',
-      dados: saidasDoGrupo,
-    };
+    return await Saida.findAll({ where: { id_usuario: idsDeTodosOsUsuariosDoMesmoGrupo }});
+
   }
 }

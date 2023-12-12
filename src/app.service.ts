@@ -37,8 +37,9 @@ export class AppService {
   }
 
 
-  async verificaProdutos(objetoComAListaDeProdutos: CreateEntradaDto | CreateSaidaDto, id_grupo: number): Promise<boolean> {
 
+  async verificaProdutos(objetoComAListaDeProdutos: CreateEntradaDto | CreateSaidaDto, id_grupo: number): Promise<boolean> {
+    
     for (const item of objetoComAListaDeProdutos.item) {
       const produto = await Produto.findOne({ where: { id: item.id_produto } });
 
@@ -56,7 +57,6 @@ export class AppService {
 
         this.logger.error(`401 - Usuário sem autorização para o Produto ${item.id_produto}`);
         throw new HttpException(`Usuário sem autorização para o Produto ${item.id_produto}`, 401);
-
       }
       return true;
     }
@@ -71,12 +71,17 @@ export class AppService {
     }
   }
 
-  async subtraiProdutos(saida: CreateSaidaDto) {
+
+  async subtraiProdutos(saida: CreateSaidaDto | Saida, reverso = false) {
+
     let produto: Produto;
 
     for (const item of saida.item) {
       produto = await Produto.findOne({ where: { id: item.id_produto } });
-      produto.quantidade -= item.quantidade;
+
+      if(reverso) produto.quantidade += item.quantidade;
+      if(!reverso) produto.quantidade -= item.quantidade;
+
       await produto.save();
     }
   }
@@ -118,7 +123,6 @@ export class AppService {
 
     return true;
   }
-
 
   async comparaPermissao(id_usuario: string, id_grupo: string): Promise<boolean> {
     const usuario = await Usuario.findOne({ where: { id: id_usuario } });
