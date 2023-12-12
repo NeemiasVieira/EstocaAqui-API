@@ -15,12 +15,11 @@ export class CreateEntradaController {
   @ApiOperation({ summary: 'Registra uma nova entrada' })
   @ApiResponse({ status: 201, description: 'Criação de uma nova entrada ' })
   @UseGuards(AuthGuard)
-  async CreateEntrada(
-    @Request() requisicao: any,
-    @Body() entrada: CreateEntradaDto,
-  ): Promise<Entrada> {
+  async CreateEntrada(@Request() requisicao: any, @Body() entrada: CreateEntradaDto): Promise<Entrada> {
     const id_usuario: number = requisicao.token.usuario.id;
+
     const id_grupo: number = requisicao.token.grupo.id;
+
     return await this.appservice.CreateEntrada(id_usuario, entrada, id_grupo);
   }
 }

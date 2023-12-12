@@ -9,11 +9,7 @@ export class CreateEntradaService {
 
   private readonly logger = new Logger('CreateEntradaService');
 
-  async CreateEntrada(
-    id_usuario: number,
-    entrada: CreateEntradaDto,
-    id_grupo: number,
-  ): Promise<Entrada> {
+  async CreateEntrada(id_usuario: number, entrada: CreateEntradaDto, id_grupo: number): Promise<Entrada> {
     this.logger.log('Tentativa de criação de entrada');
 
     //Verifica se o fornecedor existe e se o usuário está no mesmo grupo de permissões
@@ -24,10 +20,7 @@ export class CreateEntradaService {
 
     await this.appService.verificaProdutos(entrada, id_grupo);
 
-    const novaEntrada = await Entrada.create({
-      ...entrada,
-      id_usuario,
-    });
+    const novaEntrada = await Entrada.create({ ...entrada, id_usuario });
 
     await this.appService.somaProdutos(entrada);
 
