@@ -5,7 +5,7 @@ import { Usuario } from '../../usuario.model';
 export class DeleteUsuarioService {
   private readonly logger = new Logger("DeleteUsuarioService");
 
-  async DeleteUsuario(id: string) {
+  async DeleteUsuario(id: number) {
 
     this.logger.log(`Tentativa de exclusão do usuário ${id}`);
 

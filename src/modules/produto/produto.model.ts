@@ -1,11 +1,4 @@
-import {
-  BelongsTo,
-  Column,
-  DataType,
-  ForeignKey,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import {BelongsTo,Column,DataType,ForeignKey,Model,Table,} from 'sequelize-typescript';
 import { Usuario } from 'src/modules/usuario/usuario.model';
 import { Grupo } from '../grupo/grupo.model';
 
@@ -18,10 +11,10 @@ export enum unidadeDeMedida {
   unidade = 'un',
 }
 
-@Table({
-  tableName: 'Produto',
-})
+@Table({tableName: 'Produto',})
+
 export class Produto extends Model {
+
   @Column({
     type: DataType.STRING,
     allowNull: false,
@@ -42,7 +35,7 @@ export class Produto extends Model {
 
   @Column({
     type: DataType.STRING,
-    allowNull: false,
+    allowNull: true,
   })
   descricao: string;
 
@@ -66,9 +59,6 @@ export class Produto extends Model {
   })
   id_usuario: number;
 
-  /* @BelongsTo(() => Usuario)
-  usuario: Usuario; */
-
   @ForeignKey(() => Grupo)
   @Column({
     type: DataType.INTEGER,
@@ -78,16 +68,4 @@ export class Produto extends Model {
   id_grupo: number;
   @BelongsTo(() => Grupo)
   grupo: Grupo;
-
-
-  //Precisa finalizar a questão do fabricante para poder linkar com o produto.
-  /* @ForeignKey(() => Fabricante)
-  @Column({
-    type: DataType.INTEGER,
-    allowNull: false,
-  })
-  fabricanteId: number;
-
-  @BelongsTo(() => Fabricante)
-  fabriccante: Fabricante; */
 }
