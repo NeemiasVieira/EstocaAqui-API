@@ -1,39 +1,59 @@
-import { Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { Usuario } from '../usuario/usuario.model';
 import { ItemEntradaDto } from './item.dto';
 import { Fornecedor } from '../fornecedor/fornecedor.model';
 
 export enum Tipo {
-    compra = "Compra",
-    garantia = "Garantia"
+  compra = 'Compra',
+  garantia = 'Garantia',
 }
 
 @Table({
-  tableName: "Entrada"
+  tableName: 'Entrada',
 })
 export class Entrada extends Model {
-  
-  @Column
+  @Column({
+    type: DataType.ENUM,
+    allowNull: false,
+    values: Object.values(Tipo),
+  })
   tipo: Tipo;
-  
-  @Column
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   descricao: string;
-  
-  @Column
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   nf: string;
-  
-  @Column
+
   @ForeignKey(() => Fornecedor)
-  id_fornecedor: string;
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  id_fornecedor: number;
+
+  @BelongsTo(() => Fornecedor)
+  fornecedor: Fornecedor;
 
   @ForeignKey(() => Usuario)
-  @Column
-  id_usuario: string;
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  id_usuario: number;
+
+  @BelongsTo(() => Usuario)
+  usuario: Usuario;
 
   @Column({
     values: Object.values(ItemEntradaDto),
-    type: DataType.JSON
+    type: DataType.JSON,
   })
   item: ItemEntradaDto[];
-
 }
