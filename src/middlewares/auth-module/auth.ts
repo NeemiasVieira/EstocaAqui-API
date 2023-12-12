@@ -3,7 +3,7 @@ import {
   ExecutionContext,
   Injectable,
   HttpException,
-  Logger
+  Logger,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
@@ -15,7 +15,7 @@ dotevn.config();
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  private readonly logger = new Logger("AuthGuard")
+  private readonly logger = new Logger('AuthGuard');
   constructor(private jwtService: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -30,22 +30,27 @@ export class AuthGuard implements CanActivate {
         secret: process.env.JWT_SECRET,
         algorithms: ['HS256'],
       });
-      
-      const id_usuario = decoded.sub;
-      const usuario = await Usuario.findOne({where: {id: id_usuario}});
-      const grupo = await Grupo.findOne({where: {id: usuario.dataValues.id_grupo}});
 
-      if (!usuario || !grupo){
-        throw new HttpException("Usuário ou grupo não existe", 404);
+      //AJUSTA PRA NÂO CHEGAR AQUI SE NÂO TIVER TOKEN VÀLIDO
+      const id_usuario = decoded.sub;
+      const usuario = await Usuario.findOne({ where: { id: id_usuario } });
+      const grupo = await Grupo.findOne({
+        where: { id: usuario.dataValues.id_grupo },
+      });
+
+      if (!usuario || !grupo) {
+        throw new HttpException('Usuário ou grupo não existe', 404);
       }
 
-      request['token'] = { decoded, usuario: usuario.dataValues, grupo: grupo.dataValues};
-
-    } catch(erro) {
-
-      if (erro instanceof HttpException){
-        this.logger.error("404 - Usuário ou grupo não existe");
-        throw new HttpException("Usuário ou grupo não existe", 404);
+      request['token'] = {
+        decoded,
+        usuario: usuario.dataValues,
+        grupo: grupo.dataValues,
+      };
+    } catch (erro) {
+      if (erro instanceof HttpException) {
+        this.logger.error('404 - Usuário ou grupo não existe');
+        throw new HttpException('Usuário ou grupo não existe', 404);
       }
       console.log(erro);
     }
@@ -57,4 +62,3 @@ export class AuthGuard implements CanActivate {
     return type === 'Bearer' ? token : undefined;
   }
 }
-
