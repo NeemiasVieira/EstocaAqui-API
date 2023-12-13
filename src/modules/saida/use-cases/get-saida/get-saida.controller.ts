@@ -12,9 +12,12 @@ export class GetSaidaController {
   @Get()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Puxa a saída ou todas as saídas' })
-  @ApiResponse({ status: 200, description: 'Retorna a saída ou todas as saídas'})
-  @ApiResponse({ status: 401, description: "Usuário não autorizado"})
-  @ApiResponse({ status: 404, description: "Saída não encontrada"})
+  @ApiResponse({
+    status: 200,
+    description: 'Retorna a saída ou todas as saídas',
+  })
+  @ApiResponse({ status: 401, description: 'Usuário não autorizado' })
+  @ApiResponse({ status: 404, description: 'Saída não encontrada' })
   @UseGuards(AuthGuard)
   async CreateSaida(@Request() requisicao: any, @Query('id') id_saida: number): Promise<Saida[] | Saida> {
     const id_grupo: number = requisicao.token.usuario.id_grupo;
