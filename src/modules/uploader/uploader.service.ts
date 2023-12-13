@@ -1,7 +1,7 @@
 import { HttpException, Injectable, Logger } from '@nestjs/common';
 import axios from 'axios';
-import * as FormData from 'form-data';
 import * as dotevn from 'dotenv';
+import FormData from 'form-data';
 
 dotevn.config();
 
