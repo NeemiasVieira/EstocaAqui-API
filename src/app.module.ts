@@ -9,6 +9,7 @@ import { FornecedorModule } from './modules/fornecedor/fornecedor.module';
 import { GrupoModule } from './modules/grupo/grupo.module';
 import { SaidaModule } from './modules/saida/saida.module';
 import { AppService } from './app.service';
+import { UploaderModule } from './modules/uploader/uploader.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { AppService } from './app.service';
     ProdutosModule,
     GrupoModule,
     SaidaModule,
+    UploaderModule,
   ],
   controllers: [],
   providers: [AppService],
