@@ -39,7 +39,6 @@ export class GetFornecedorService {
       (usuario) => String(usuario.id), //Não tirar esse string, sei lá porque mas o sequelize precisa
     );
 
-    console.log(idsDeTodosOsUsuariosDoMesmoGrupo);
     return await Fornecedor.findAll({
       where: { id_usuario: idsDeTodosOsUsuariosDoMesmoGrupo },
     });

@@ -1,38 +1,25 @@
-import { HttpException, Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Fornecedor } from '../../fornecedor.model';
 import { UpdateFornecedorDto } from './update-fornecedor.dto';
+import { AppService } from 'src/app.service';
 
 @Injectable()
 export class UpdateFornecedorService {
   private readonly logger = new Logger('UpdateFornecedorService');
+  constructor(private readonly appService: AppService) {}
 
-  async updateFornecedor(
-    id_fornecedor: number,
-    fornecedorAtualizado: UpdateFornecedorDto,
-    id_usuario: number,
-  ): Promise<Fornecedor> {
+  async updateFornecedor(id_fornecedor: number, fornecedorAtualizado: UpdateFornecedorDto, id_grupo: number): Promise<Fornecedor> {
     this.logger.log(`Tentativa de atualização do fornecedor ${id_fornecedor}`);
-    const fornecedor = await Fornecedor.findOne({
-      where: { id: id_fornecedor },
-    });
 
-    if (!fornecedor) {
-      this.logger.error('404 - Fornecedor não encontrado');
-      throw new HttpException('Fornecedor não encontrado!', 404);
-    }
-
-    if (fornecedor.id_usuario != id_usuario) {
-      this.logger.error('401 - Usuário não autorizado');
-      throw new HttpException('Usuário não autorizado!', 401);
-    }
+    const forncedorEncontrado = await this.appService.verificaFornecedor(id_fornecedor, id_grupo);
 
     Object.keys(fornecedorAtualizado).forEach((chave) => {
-      fornecedor[chave] = fornecedorAtualizado[chave];
+      forncedorEncontrado[chave] = fornecedorAtualizado[chave];
     });
 
-    await fornecedor.save();
+    await forncedorEncontrado.save();
     this.logger.verbose(`200 - Fornecedor ${id_fornecedor} atualizado.`);
 
-    return fornecedor;
+    return forncedorEncontrado;
   }
 }
