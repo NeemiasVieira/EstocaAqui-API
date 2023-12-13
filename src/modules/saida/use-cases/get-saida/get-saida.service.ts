@@ -7,7 +7,6 @@ export class GetSaidaService {
   private readonly logger = new Logger('GetSaidaService');
 
   async getSaida(id_grupo: number, id_saida?: number): Promise<Saida[] | Saida> {
-
     if (id_saida) {
       this.logger.verbose(`200 - Busca da saída ${id_saida} realizada`);
 
@@ -30,11 +29,10 @@ export class GetSaidaService {
 
     this.logger.verbose(`200 - Buscando todas as saídas`);
 
-    const usuariosDoMesmoGrupo = await Usuario.findAll({ where: { id_grupo: id_grupo }});
+    const usuariosDoMesmoGrupo = await Usuario.findAll({ where: { id_grupo: id_grupo } });
 
     const idsDeTodosOsUsuariosDoMesmoGrupo = usuariosDoMesmoGrupo.map((usuario) => String(usuario.id));
 
-    return await Saida.findAll({ where: { id_usuario: idsDeTodosOsUsuariosDoMesmoGrupo }});
-
+    return await Saida.findAll({ where: { id_usuario: idsDeTodosOsUsuariosDoMesmoGrupo } });
   }
 }
