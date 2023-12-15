@@ -12,7 +12,9 @@ export class GetSaidaService {
 
       const saidaEncontrada = await Saida.findOne({ where: { id: id_saida } });
 
-      const usuarioQueCriouASaida = await Usuario.findOne({ where: { id: saidaEncontrada.id_usuario } });
+      const usuarioQueCriouASaida = await Usuario.findOne({
+        where: { id: saidaEncontrada.id_usuario },
+      });
 
       if (!saidaEncontrada) {
         this.logger.error('404 - Saída não encontrada');
@@ -29,10 +31,16 @@ export class GetSaidaService {
 
     this.logger.verbose(`200 - Buscando todas as saídas`);
 
-    const usuariosDoMesmoGrupo = await Usuario.findAll({ where: { id_grupo: id_grupo } });
+    const usuariosDoMesmoGrupo = await Usuario.findAll({
+      where: { id_grupo: id_grupo },
+    });
 
-    const idsDeTodosOsUsuariosDoMesmoGrupo = usuariosDoMesmoGrupo.map((usuario) => String(usuario.id));
+    const idsDeTodosOsUsuariosDoMesmoGrupo = usuariosDoMesmoGrupo.map(
+      (usuario) => String(usuario.id), //Não tirar esse string, sei lá porque mas o sequelize precisa
+    );
 
-    return await Saida.findAll({ where: { id_usuario: idsDeTodosOsUsuariosDoMesmoGrupo } });
+    return await Saida.findAll({
+      where: { id_usuario: idsDeTodosOsUsuariosDoMesmoGrupo },
+    });
   }
 }

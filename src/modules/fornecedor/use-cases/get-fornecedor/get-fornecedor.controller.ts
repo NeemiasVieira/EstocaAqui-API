@@ -1,12 +1,7 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, Request, UseGuards } from '@nestjs/common';
 import { GetFornecedorService } from './get-fornecedor.service';
 import { Fornecedor } from '../../fornecedor.model';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
 
 @Controller('fornecedor')
@@ -22,9 +17,8 @@ export class GetFornecedorController {
   })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  async getFornecedor(
-    @Query('id') id_fornecedor: number,
-  ): Promise<Fornecedor | Fornecedor[]> {
-    return await this.appservice.getFornecedor(id_fornecedor);
+  async getFornecedor(@Query('id') id_fornecedor: number, @Request() requisicao: any): Promise<Fornecedor | Fornecedor[]> {
+    const id_grupo: number = requisicao.token.usuario.id_grupo;
+    return await this.appservice.getFornecedor(id_grupo, id_fornecedor);
   }
 }

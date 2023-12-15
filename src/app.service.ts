@@ -14,32 +14,28 @@ export class AppService {
 
   constructor() {}
 
-
-  async verificaFornecedor(id_fornecedor: number, id_grupo: number): Promise<boolean> {
-    const fornecedor = await Fornecedor.findOne({
+  async verificaFornecedor(id_fornecedor: number, id_grupo: number): Promise<Fornecedor> {
+    const forncedorEncontrado = await Fornecedor.findOne({
       where: { id: id_fornecedor },
     });
 
-    if (!fornecedor) {
+    if (!forncedorEncontrado) {
       this.logger.error(`404 - Fornecedor ${id_fornecedor} não encontrado`);
       throw new HttpException(`Fornecedor ${id_fornecedor} não encontrado`, 404);
     }
 
     const usuarioQueCriouOFornecedor = await Usuario.findOne({
-      where: { id: fornecedor.id_usuario },
+      where: { id: forncedorEncontrado.id_usuario },
     });
 
     if (usuarioQueCriouOFornecedor.id_grupo != id_grupo) {
       this.logger.error(`401 - Usuário sem permissão para o Fornecedor ${id_fornecedor}`);
       throw new HttpException(`Usuário sem permissão para o Fornecedor ${id_fornecedor}`, 401);
     }
-    return true;
+    return forncedorEncontrado;
   }
 
-
-
   async verificaProdutos(objetoComAListaDeProdutos: CreateEntradaDto | CreateSaidaDto, id_grupo: number): Promise<boolean> {
-    
     for (const item of objetoComAListaDeProdutos.item) {
       const produto = await Produto.findOne({ where: { id: item.id_produto } });
 
@@ -54,7 +50,6 @@ export class AppService {
       });
 
       if (usuarioQueCriouOProduto.id_grupo != id_grupo) {
-
         this.logger.error(`401 - Usuário sem autorização para o Produto ${item.id_produto}`);
         throw new HttpException(`Usuário sem autorização para o Produto ${item.id_produto}`, 401);
       }
@@ -71,16 +66,14 @@ export class AppService {
     }
   }
 
-
   async subtraiProdutos(saida: CreateSaidaDto | Saida, reverso = false) {
-
     let produto: Produto;
 
     for (const item of saida.item) {
       produto = await Produto.findOne({ where: { id: item.id_produto } });
 
-      if(reverso) produto.quantidade += item.quantidade;
-      if(!reverso) produto.quantidade -= item.quantidade;
+      if (reverso) produto.quantidade += item.quantidade;
+      if (!reverso) produto.quantidade -= item.quantidade;
 
       await produto.save();
     }
@@ -99,9 +92,7 @@ export class AppService {
     return true;
   }
 
-
   async verificaPermissão(objetoDeComparacao: Entrada | Fornecedor | Produto, id_grupo: number, permissaoUsuario?: string, somenteAdmin?: boolean) {
-
     const usuario = await Usuario.findOne({
       where: { id: objetoDeComparacao.id_usuario },
     });
