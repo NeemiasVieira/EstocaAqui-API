@@ -12,12 +12,13 @@ import { GetUsuarioController } from './use-cases/get-usuario/get-usuario.contro
 import { GetUsuarioService } from './use-cases/get-usuario/get-usuario.service';
 
 @Module({
-  imports: [JwtModule.register({
-    secret: process.env.JWT_SECRET,
-    signOptions: { expiresIn: '7h', algorithm: 'HS256' }
-  })],
+  imports: [
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '7h', algorithm: 'HS256' },
+    }),
+  ],
   controllers: [CreateUsuarioController, LoginController, DeleteUsuarioController, UpdateUsuarioController, GetUsuarioController],
-  providers: [CreateUsuarioService, LoginService, DeleteUsuarioService, UpdateUsuarioService, GetUsuarioService]
+  providers: [CreateUsuarioService, LoginService, DeleteUsuarioService, UpdateUsuarioService, GetUsuarioService],
 })
-
 export class UsuarioModule {}
