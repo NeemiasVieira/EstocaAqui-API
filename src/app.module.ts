@@ -10,20 +10,11 @@ import { GrupoModule } from './modules/grupo/grupo.module';
 import { SaidaModule } from './modules/saida/saida.module';
 import { AppService } from './app.service';
 import { UploaderModule } from './modules/uploader/uploader.module';
+import { AppController } from './app.controller';
 
 @Module({
-  imports: [
-    DatabaseModule,
-    UsuarioModule,
-    AuthModule,
-    EntradasModule,
-    FornecedorModule,
-    ProdutosModule,
-    GrupoModule,
-    SaidaModule,
-    UploaderModule,
-  ],
-  controllers: [],
+  imports: [DatabaseModule, UsuarioModule, AuthModule, EntradasModule, FornecedorModule, ProdutosModule, GrupoModule, SaidaModule, UploaderModule],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule implements OnApplicationBootstrap {
@@ -31,8 +22,6 @@ export class AppModule implements OnApplicationBootstrap {
 
   onApplicationBootstrap() {
     console.clear();
-    this.logger.debug(
-      'API EstocaAqui iniciada com sucesso em http://localhost:3333 💡🚷🚀',
-    );
+    this.logger.debug('API EstocaAqui iniciada com sucesso em http://localhost:3333 💡🚷🚀');
   }
 }
