@@ -37,7 +37,7 @@ export class DeleteUsuarioService {
     }
 
     //Aqui dá problema para excluir usuário caso ele já tenha cadastrado algo. Trabalhar essa lógica.
-    //await Usuario.destroy({ where: { id: id } });
+    await Usuario.destroy({ where: { id: id } });
 
     this.logger.verbose(`200 - Usuário ${id} excluído.`);
   }

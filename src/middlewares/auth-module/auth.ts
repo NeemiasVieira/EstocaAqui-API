@@ -1,10 +1,4 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  Injectable,
-  HttpException,
-  Logger,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, Injectable, HttpException, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import * as dotevn from 'dotenv';
@@ -51,6 +45,9 @@ export class AuthGuard implements CanActivate {
       if (erro instanceof HttpException) {
         this.logger.error('404 - Usuário ou grupo não existe');
         throw new HttpException('Usuário ou grupo não existe', 404);
+      } else if (erro.name === 'TokenExpiredError') {
+        this.logger.error('401 - Token expirado');
+        throw new HttpException('Token expirado', 401);
       }
       console.log(erro);
     }

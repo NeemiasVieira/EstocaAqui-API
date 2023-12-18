@@ -1,10 +1,5 @@
 import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
-import {
-  ApiBearerAuth,
-  ApiOperation,
-  ApiResponse,
-  ApiTags,
-} from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateProdutoService } from './create-produto-service';
 import { CreateProdutoDto } from './create-produto-dto';
 import { AuthGuard } from 'src/middlewares/auth-module/auth';
@@ -31,17 +26,10 @@ export class CreateProdutoController {
   })
   @ApiBearerAuth()
   @UseGuards(AuthGuard)
-  async criarProduto(
-    @Request() requisicao: any,
-    @Body() novoProduto: CreateProdutoDto,
-  ): Promise<object> {
+  async criarProduto(@Request() requisicao: any, @Body() novoProduto: CreateProdutoDto): Promise<object> {
     const id_usuario = requisicao.token.usuario.id;
     const id_grupo = requisicao.token.grupo.id;
-    const resposta = await this.appserivce.createProduto(
-      id_usuario,
-      id_grupo,
-      novoProduto,
-    );
+    const resposta = await this.appserivce.createProduto(id_usuario, id_grupo, novoProduto);
     return resposta;
   }
 }
