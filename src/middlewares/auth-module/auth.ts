@@ -48,8 +48,10 @@ export class AuthGuard implements CanActivate {
       } else if (erro.name === 'TokenExpiredError') {
         this.logger.error('401 - Token expirado');
         throw new HttpException('Token expirado', 401);
+      } else {
+        this.logger.error("401 - Token invalido.");
+        throw new HttpException('Token Invalido!', 401);
       }
-      console.log(erro);
     }
     return true;
   }
