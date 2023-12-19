@@ -7,6 +7,8 @@ import { CreateGrupoService } from './use-cases/create-grupo/create-grupo.servic
 import { DeleteGrupoService } from './use-cases/delete-grupo/delete-grupo.service';
 import { UpdateGrupoService } from './use-cases/update-grupo/update-grupo.service';
 import { GetGrupoService } from './use-cases/get-grupo/get-grupo.service';
+import { VerificaCpnjController } from './use-cases/verifica-cpnj/verifica-cpnj.controller';
+import { VerificaCpnjService } from './use-cases/verifica-cpnj/verifica-cpnj.service';
 
 @Module({
   controllers: [
@@ -14,12 +16,14 @@ import { GetGrupoService } from './use-cases/get-grupo/get-grupo.service';
     GetGrupoController,
     DeleteGrupoController,
     UpdateGrupoController,
+    VerificaCpnjController,
   ],
   providers: [
     CreateGrupoService,
     DeleteGrupoService,
     UpdateGrupoService,
     GetGrupoService,
+    VerificaCpnjService,
   ],
 })
 export class GrupoModule {}

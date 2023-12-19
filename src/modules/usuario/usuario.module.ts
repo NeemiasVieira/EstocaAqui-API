@@ -10,6 +10,8 @@ import { UpdateUsuarioController } from './use-cases/update-usuario/update-usuar
 import { UpdateUsuarioService } from './use-cases/update-usuario/update-usuario.service';
 import { GetUsuarioController } from './use-cases/get-usuario/get-usuario.controller';
 import { GetUsuarioService } from './use-cases/get-usuario/get-usuario.service';
+import { VerificaCpfController } from './use-cases/verifica-cpf/verifica-cpf.controller';
+import { VerificaCpfService } from './use-cases/verifica-cpf/verifica-cpf.service';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { GetUsuarioService } from './use-cases/get-usuario/get-usuario.service';
       signOptions: { expiresIn: '7h', algorithm: 'HS256' },
     }),
   ],
-  controllers: [CreateUsuarioController, LoginController, DeleteUsuarioController, UpdateUsuarioController, GetUsuarioController],
-  providers: [CreateUsuarioService, LoginService, DeleteUsuarioService, UpdateUsuarioService, GetUsuarioService],
+  controllers: [CreateUsuarioController, LoginController, DeleteUsuarioController, UpdateUsuarioController, GetUsuarioController, VerificaCpfController],
+  providers: [CreateUsuarioService, LoginService, DeleteUsuarioService, UpdateUsuarioService, GetUsuarioService, VerificaCpfService],
 })
 export class UsuarioModule {}
