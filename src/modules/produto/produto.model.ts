@@ -45,6 +45,18 @@ export class Produto extends Model {
  })
  cor: string;
 
+ @Column({
+  type: DataType.DOUBLE,
+  allowNull: true,
+ })
+ valor_de_compra: number;
+
+ @Column({
+  type: DataType.DOUBLE,
+  allowNull: true,
+ })
+ valor_de_venda: number;
+
   @ForeignKey(() => Usuario)
   @Column({
     type: DataType.INTEGER,

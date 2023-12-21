@@ -30,4 +30,20 @@ export class CreateProdutoDto {
   @IsString()
   @IsOptional()
   cor: string;
+
+  @ApiProperty({
+    description: 'Valor de compra em BRL',
+    example: 25.79,
+  })
+  @IsNumber()
+  @IsOptional()
+  valor_de_compra: number;
+
+  @ApiProperty({
+    description: 'Valor de venda em BRL',
+    example: 40.90,
+  })
+  @IsNumber()
+  @IsOptional()
+  valor_de_venda: number;
 }
