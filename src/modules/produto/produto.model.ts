@@ -39,18 +39,11 @@ export class Produto extends Model {
   })
   descricao: string;
 
-  @Column({
-    type: DataType.ENUM,
-    allowNull: false,
-    values: Object.values(unidadeDeMedida),
-  })
-  unidade_de_medida: unidadeDeMedida;
-
-  @Column({
-    type: DataType.FLOAT,
-    allowNull: false,
-  })
-  quantidade_medida: number;
+ @Column({
+  type: DataType.STRING,
+  allowNull: true,
+ })
+ cor: string;
 
   @ForeignKey(() => Usuario)
   @Column({

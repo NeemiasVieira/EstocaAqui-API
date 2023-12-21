@@ -24,17 +24,10 @@ export class CreateProdutoDto {
   descricao: string;
 
   @ApiProperty({
-    description: 'Unidade de medida do produto',
-    example: 'ml',
-    enum: Object.values(unidadeDeMedida),
+    description: "Cor da tag do produto",
+    example: "#FFFFFF"
   })
-  @IsNotEmpty()
-  @IsEnum(unidadeDeMedida, { message: 'Unidade de medida inválida' })
-  unidade_de_medida: unidadeDeMedida;
-
-  @ApiProperty({ description: 'Quantidade medida do produto', example: 350 })
-  @IsNotEmpty()
-  @IsNumber()
-  @Min(0, { message: 'A quantidade medida deve ser maior que zero' })
-  quantidade_medida: number;
+  @IsString()
+  @IsOptional()
+  cor: string;
 }

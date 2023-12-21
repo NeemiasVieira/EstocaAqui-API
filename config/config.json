@@ -1,0 +1,41 @@
+{
+  "development": {
+    "username": "",
+    "password": "",
+    "database": "postgres",
+    "host": "",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true, 
+        "rejectUnauthorized": false 
+      }
+    }
+  },
+  "test": {
+    "username": "",
+    "password": "",
+    "database": "postgres",
+    "host": "",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true, 
+        "rejectUnauthorized": false 
+      }
+    }
+  },
+  "production": {
+    "username": "",
+    "password": "",
+    "database": "postgres",
+    "host": "",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true, 
+        "rejectUnauthorized": false 
+      }
+    }
+  }
+}
