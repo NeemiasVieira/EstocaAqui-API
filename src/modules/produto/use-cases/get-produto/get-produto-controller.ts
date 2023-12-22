@@ -16,7 +16,7 @@ export class GetProdutoController {
   @Get()
   @ApiOperation({ summary: 'Busca produto(s) cadastrado(s) pelo usuário' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'Retorna o(s) produto(s) encontrado(s)',
   })
   @ApiResponse({
@@ -28,11 +28,13 @@ export class GetProdutoController {
   async getProduto(
     @Request() requisicao: any,
     @Query('id') idProduto: number,
+    @Query('ordenarPor') ordenarPor: string,
+    @Query('cor') cor: string,
   ): Promise<object> {
 
     const id_grupo = requisicao.token.grupo.id;
 
-    const resposta = await this.appserivce.getProduto(id_grupo, idProduto);
+    const resposta = await this.appserivce.getProduto(id_grupo, idProduto, ordenarPor, cor);
     return resposta;
   }
 }
